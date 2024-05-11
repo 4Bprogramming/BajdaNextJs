@@ -3,50 +3,53 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenuButton from "../BurgeMenuButon/BurgerMenuButton";
-import logo from "../../../public/resources/logo.png"
+import logo from "../../../public/resources/logo.png";
 
 function NavBar() {
-  
-  const [isVisible, SetIsVisible] = React.useState(window.innerWidth >= 640);
+  const [isVisible, SetIsVisible] = React.useState(false);
   const showOptions = () => {
     SetIsVisible(!isVisible);
   };
-  React.useEffect(() => {
-    const handleResize = () => {
-      SetIsVisible(window.innerWidth >= 640);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
-    <header class="w-full">
-      <nav class="flex flex-row-reverse relative h-28 justify-between items-center px-7 py-4 shadow-lg box-shadow:1px 2px 15px rgba(100,100,100,0.3">
+    <header class="w-full shadow-lg box-shadow:1px 2px 15px rgba(100,100,100,0.3)">
+      <nav class="flex flex-row-reverse relative h-32 justify-between items-center px-7 py-4  sm:flex-row md:max-w-5xl md:m-auto  ">
         <Image
-          src= {logo}
+          src={logo}
           alt="Bajda Logo"
-          style={{ width:"60px",height:"60px"}}
+          style={{ width: "70px", height: "70px" }}
         />
 
         <ul
-          className={`${isVisible
-            ? "bg-white border-b-2 border-x-2 border-custom-green rounded flex flex-col absolute top-full left-1 sm:flex-row sm:static sm:border-t-2 md:mr-24 md:text-lg"
-            :"opacity-0"}`}>
-          <li class="py-0.5 px-1 text-xl">
-            <Link href={"/"}>Home</Link>
+          className={`opacity-${
+            isVisible ? "100" : "0"
+          }  bg-white border-b-2 w-40 border-x-2 border-custom-green rounded flex flex-col absolute top-full left-1 sm:w-auto sm:flex-row sm:static sm:border-t-2 sm:border-none  sm:opacity-100 md:mr-16 md:text-lg font-semibold	
+            `}
+        >
+          <li class="py-0.5 pl-9 sm:pl-0 text-[1.12rem] mr-2 md:mr-6 xl:mr-10">
+            <Link href={"/"} className="relative group">
+              Home
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-green-500 transform origin-right transition-all duration-500 scale-x-0 group-hover:scale-x-100 group-hover:origin-left"></span>
+            </Link>
           </li>
-          <li class="py-0.5 px-1 text-xl">
-            <Link href={"/"}>Nosotros</Link>
+          <li class="py-0.5 pl-9 sm:pl-0 text-[1.12rem] mr-2 md:mr-6 xl:mr-10">
+            <Link href={"/"} className="relative group">
+              Nosotros
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-green-500 transform origin-right transition-all duration-500 scale-x-0 group-hover:scale-x-100 group-hover:origin-left"></span>
+            </Link>
           </li>
-          <li class="py-0.5 px-1 text-xl">
-            <Link href={"/"}>Servicios</Link>
+          <li class="py-0.5 pl-9 sm:pl-0 text-[1.12rem] mr-2 md:mr-6 xl:mr-10">
+            <Link href={"/"} className="relative group">
+              Servicios
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-green-500 transform origin-right transition-all duration-500 scale-x-0 group-hover:scale-x-100 group-hover:origin-left"></span>
+            </Link>
           </li>
-          <li class="py-0.5 px-1 text-xl">
-            <Link href={"/"}>Contacto</Link>
+          <li class="py-0.5 pl-9 sm:pl-0 text-[1.12rem] mr-2 md:mr-6 xl:mr-10">
+            <Link href={"/"} className="relative group">
+              Contacto
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-green-500 transform origin-right transition-all duration-500 scale-x-0 group-hover:scale-x-100 group-hover:origin-left"></span>
+            </Link>
           </li>
-        
         </ul>
         <BurgerMenuButton style={""} showOptions={showOptions} />
       </nav>
