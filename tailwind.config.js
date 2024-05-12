@@ -15,7 +15,10 @@ module.exports = {
       },
       colors: {
         'custom-green': '#2eca6a'
-      }
+      },
+      screens: {
+        'max-320': {'max': '320px'},
+      }  
     },
   
   },
