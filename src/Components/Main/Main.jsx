@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import mainBanner from "../../../public/resources/mainImage.jpg";
+import nuestroEstudio from "../../../public/resources/nuestroEstudio.jpg";
+import GreenButton from "../Buttons/greenButton";
 
 function Main() {
   return (
@@ -26,8 +28,40 @@ function Main() {
           </p>
         </article>
       </section>
-      <section class="bg-fuchsia-400 h-32">
-        <p class="pt-10">Complete Second Section</p>
+      <section class="flex flex-col items-center">
+        <GreenButton text="Proyectos" style="mt-10 mb-10" />
+        <p class=" text-5xl text-custom-green">Nosotros</p>
+      </section>
+      <section>
+        <article class="grid grid-cols-2 mb-14">
+          <nuestro-estudio-left class="block">
+            <Image src={nuestroEstudio} />
+          </nuestro-estudio-left>
+          <nuestro-estudio-right class="block">
+            <h3>
+              Nuestro <span>Estudio</span>
+            </h3>
+            <p>
+              Partiendo de la premisa de que la presencia humana da significado
+              a la arquitectura, acompañamos a nuestros clientes en cada etapa
+              del proyecto, dando respuestas a cada una de las necesidades
+              planteadas.
+            </p>
+            <p>
+              A través del contacto constante con nuestros clientes, intentamos
+              encontrar los sentimientos, sensaciones y anhelosque definen y
+              completan las expectativas puestas en cada idea personal.
+            </p>
+            <h4>TRAYECTORIA</h4>
+            <p>
+              A partir del año 1998 y desde la ciudad de Bariloche, en Rio
+              Negro, Argentina, Martín Bajda y Asociados trabaja para hacer
+              realidad los proyectos de sus clientes locales y extranjeros,
+              acompañándolos y comprometiendo todo su conocimiento profesional y
+              voluntad personal en cada nuevo planteo arquitectónico.
+            </p>
+          </nuestro-estudio-right>
+        </article>
       </section>
     </main>
   );
