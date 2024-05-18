@@ -14,11 +14,16 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        'custom-green': '#2eca6a'
+        'custom-green': '#2eca6a',
+        'grey-1':'#555',
+        'grey-2':'#adadad'
       },
       screens: {
         'max-320': {'max': '320px'},
-      }  
+      },
+      boxShadow: {
+        'buttonShadow': '0 10px 20px -8px rgba(0, 0, 0, 0.7)',
+      },  
     },
   
   },
