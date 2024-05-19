@@ -71,10 +71,11 @@ function Main() {
           </article>
         </section>
       </main>
-      <section>
+      <h2 class="text-5xl text-custom-green text-center  bg-custom-contact md:pb-8">Contacto</h2>
+      <contact-media-group class=" bg-custom-contact md:grid md:grid-cols-12 px-6 lg:gap-y-32 md:mb-4  ">
         <ContactForm/>
-        <ContactMedia/>
-      </section>
+        <ContactMedia class="md:col-span-4"/>
+      </contact-media-group>
     </>
   );
 }
