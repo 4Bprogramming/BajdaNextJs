@@ -33,27 +33,27 @@ function Main() {
         <p class=" text-5xl text-custom-green">Nosotros</p>
       </section>
       <section>
-        <article class="grid grid-cols-2 mb-14">
-          <nuestro-estudio-left class="block">
+        <article class="grid grid-cols-1  md:grid-cols-2 md:mb-14 md:mt-24 md:mr-32">
+          <nuestro-estudio-left class="block p-2 md:p-6">
             <Image src={nuestroEstudio} />
           </nuestro-estudio-left>
-          <nuestro-estudio-right class="block">
-            <h3>
-              Nuestro <span>Estudio</span>
+          <nuestro-estudio-right class="block relative p-2 md:p-6">
+            <h3 class="text-3xl font-semibold uppercase mb-2">
+              Nuestro<span class=" text-grey-2 after:content-[''] after:absolute after:bg-custom-green after:h-1 after:w-16 after:top-10 after:left-2 md:after:top-[60px] md:after:left-[26px]">Estudio</span>
             </h3>
-            <p>
+            <p class="text-grey-1">
               Partiendo de la premisa de que la presencia humana da significado
               a la arquitectura, acompañamos a nuestros clientes en cada etapa
               del proyecto, dando respuestas a cada una de las necesidades
               planteadas.
             </p>
-            <p>
+            <p class="text-grey-1">
               A través del contacto constante con nuestros clientes, intentamos
               encontrar los sentimientos, sensaciones y anhelosque definen y
               completan las expectativas puestas en cada idea personal.
             </p>
-            <h4>TRAYECTORIA</h4>
-            <p>
+            <h4 class=" my-1 font-semibold text-grey-1">TRAYECTORIA</h4>
+            <p class="text-grey-1">
               A partir del año 1998 y desde la ciudad de Bariloche, en Rio
               Negro, Argentina, Martín Bajda y Asociados trabaja para hacer
               realidad los proyectos de sus clientes locales y extranjeros,
