@@ -2,33 +2,37 @@ import React from "react";
 
 function ContactForm() {
   return (
-    <>
-      <h2 class="text-5xl text-custom-green text-center">Contacto</h2>
-      <form action="" class="flex flex-col items-center mt-5 py-3 max-w-4xl m-auto lg:border-2 lg:border-custom-green ">
-        <div class="flex flex-col w-full max-w-3xl ">
-          <label for="nombre" class="mb-1 text-lg pl-2">
-            Nombre
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            placeholder="Ingrese Nombre"
-            class=" h-14 mx-2 p-2 border-form-grey-border border-2 rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green focus-within:border-custom-green"
-          />
-        </div>
-        <div class="flex flex-col w-full max-w-3xl">
-          <label for="apellido" class="mb-1 text-lg pl-2">
-            Apellido
-          </label>
-          <input
-            type="text"
-            id="apellido"
-            name="apellido"
-            placeholder="Ingrese Apellido"
-            class="h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
-          />
-        </div>
+    <section class="bg-custom-contact pb-10 md:col-span-7 lg:col-span-8">
+      <form
+        action=""
+        class="flex flex-col items-center max-w-4xl m-auto lg:py-3 lg:border-2 lg:border-custom-green "
+      >
+        <group class="flex flex-col w-full max-w-3xl md:flex-row">
+          <div class="flex flex-col w-full max-w-3xl  md:w-1/2">
+            <label for="nombre" class="mb-1 text-lg pl-2">
+              Nombre
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Ingrese Nombre"
+              class=" h-14 mx-2 p-2 border-form-grey-border border-2 rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green focus-within:border-custom-green"
+            />
+          </div>
+          <div class="flex flex-col w-full max-w-3xl md:w-1/2">
+            <label for="apellido" class="mb-1 text-lg pl-2">
+              Apellido
+            </label>
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              placeholder="Ingrese Apellido"
+              class="h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
+            />
+          </div>
+        </group>
         <div class="flex flex-col w-full max-w-3xl">
           <label for="email" class="mb-1 text-lg pl-2">
             Correo Electrónico
@@ -73,9 +77,9 @@ function ContactForm() {
             id="mensaje"
             name="mensaje"
             placeholder="Mensaje..."
-            class=" mx-2 p-2 border-2 border-form-grey-border rounded-md md:min-h-16 focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green
+            class=" mx-2 p-2 border-2 border-form-grey-border rounded-md md:min-h-28 focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green
              hover:border-custom-green"
-          ></textarea>
+          />
         </div>
         <button
           type="submit"
@@ -84,7 +88,7 @@ function ContactForm() {
           Enviar
         </button>
       </form>
-    </>
+      </section>
   );
 }
 
