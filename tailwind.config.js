@@ -19,7 +19,8 @@ module.exports = {
         'grey-1':'#555',
         'grey-2':'#adadad',
         'form-grey-border':'#ced4da',
-        'form-input-color':'#495057'
+        'form-input-color':'#495057',
+        'custom-contact':'#faf8f8'
       },
       screens: {
         'max-320': {'max': '320px'},
