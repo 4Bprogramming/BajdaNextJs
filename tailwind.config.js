@@ -13,10 +13,13 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      borderColor: ['focus-visible', 'active', 'hover', 'focus'],
       colors: {
         'custom-green': '#2eca6a',
         'grey-1':'#555',
-        'grey-2':'#adadad'
+        'grey-2':'#adadad',
+        'form-grey-border':'#ced4da',
+        'form-input-color':'#495057'
       },
       screens: {
         'max-320': {'max': '320px'},
