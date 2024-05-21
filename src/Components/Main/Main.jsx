@@ -9,7 +9,7 @@ import ContactMedia from "../ConctactMedia/ContactMedia";
 function Main() {
   return (
     <>
-      <main class="pt-32">
+      <main class="pt-32" id="home">
         <section class="relative">
           <div class="sm:max-h-44 md:max-h-none overflow-hidden">
             <Image
@@ -31,9 +31,10 @@ function Main() {
             </p>
           </article>
         </section>
-        <section class="flex flex-col items-center">
+        <section class="flex flex-col items-center" id="nosotros">
           <GreenButton text="Proyectos" style="mt-10 mb-10" />
-          <h2 class=" text-5xl text-custom-green">Nosotros</h2>
+         
+          <h2 class=" text-5xl text-custom-green" >Nosotros</h2>
         </section>
         <section>
           <article class="grid grid-cols-1  md:grid-cols-2 md:mb-14 md:mt-24 md:mr-32">
@@ -69,9 +70,10 @@ function Main() {
               </p>
             </nuestro-estudio-right>
           </article>
-        </section>
+        </section >
       </main>
-      <h2 class="text-5xl text-custom-green text-center  bg-custom-contact md:pb-8">Contacto</h2>
+
+      <h2 class="text-5xl text-custom-green text-center  bg-custom-contact md:pb-8" id="contacto">Contacto</h2>
       <contact-media-group class=" bg-custom-contact md:grid md:grid-cols-12 px-6 lg:gap-y-32 md:mb-4  ">
         <ContactForm/>
         <ContactMedia class="md:col-span-4"/>

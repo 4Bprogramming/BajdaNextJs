@@ -27,22 +27,22 @@ function NavBar() {
             `}
         >
           <li class="py-0.5 pl-9 sm:pl-0 text-[1.12rem] mr-2 md:mr-6 xl:mr-10">
-            <Link href={"/"} className="relative group">
+            <a href={"#home"} className="relative group">
               Home
               <span className="absolute inset-x-0 bottom-0 h-0.5 bg-green-500 transform origin-right transition-all duration-500 scale-x-0 group-hover:scale-x-100 group-hover:origin-left"></span>
-            </Link>
+            </a>
           </li>
           <li class="py-0.5 pl-9 sm:pl-0 text-[1.12rem] mr-2 md:mr-6 xl:mr-10">
-            <Link href={"/"} className="relative group">
+            <a href={"#nosotros"} className="relative group">
               Nosotros
               <span className="absolute inset-x-0 bottom-0 h-0.5 bg-green-500 transform origin-right transition-all duration-500 scale-x-0 group-hover:scale-x-100 group-hover:origin-left"></span>
-            </Link>
+            </a>
           </li>
           <li class="py-0.5 pl-9 sm:pl-0 text-[1.12rem] mr-2 md:mr-6 xl:mr-10">
-            <Link href={"/"} className="relative group">
+            <a href={"#contacto"} className="relative group">
               Contacto
               <span className="absolute inset-x-0 bottom-0 h-0.5 bg-green-500 transform origin-right transition-all duration-500 scale-x-0 group-hover:scale-x-100 group-hover:origin-left"></span>
-            </Link>
+            </a>
           </li>
         </ul>
         <BurgerMenuButton style={""} showOptions={showOptions} />

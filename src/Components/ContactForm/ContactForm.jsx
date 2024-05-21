@@ -1,11 +1,51 @@
-import React from "react";
+"use client"
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 function ContactForm() {
+
+
+  function sendEmail(e) {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_asm3con",
+        "template_n68spek",
+        e.target,
+        /* "u1W0PSDVrZHmTdhGBrhGp", */
+        // '7lKAr0QQPtaCO09cU',
+        "pbL25b0JuSENRfmSN",
+        alert("Su mensaje ha sido enviado, pronto te responderemos")
+      )
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+    // navigate("/");
+  }
+
+  const form = useRef();
+
+  // const sendEmail = (e) => {
+  //   e.preventDefault();
+
+  //   emailjs.sendForm('service_asm3con', 'template_n68spek', form.current, 'pbL25b0JuSENRfmSN')
+  //     .then((result) => {
+  //         console.log(result.text);
+  //     }, (error) => {
+  //         console.log(error.text);
+  //     });
+  // };
+
+  
+
   return (
     <section class="bg-custom-contact pb-10 md:col-span-7 lg:col-span-8">
       <form
-        action=""
+      ref={form} onSubmit={sendEmail}
+      // onSubmit={(e) => sendEmail(e)}
+        // action=""
         class="flex flex-col items-center max-w-4xl m-auto lg:py-3 lg:border-2 lg:border-custom-green "
+        
       >
         <group class="flex flex-col w-full max-w-3xl md:flex-row">
           <div class="flex flex-col w-full max-w-3xl  md:w-1/2">
@@ -15,7 +55,7 @@ function ContactForm() {
             <input
               type="text"
               id="nombre"
-              name="nombre"
+              name="name"
               placeholder="Ingrese Nombre"
               class=" h-14 mx-2 p-2 border-form-grey-border border-2 rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green focus-within:border-custom-green"
             />
@@ -40,7 +80,7 @@ function ContactForm() {
           <input
             type="email"
             id="email"
-            name="email"
+            name="correo"
             placeholder="Ingrese Correo Electrónico"
             class="h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
           />
@@ -83,6 +123,7 @@ function ContactForm() {
         </div>
         <button
           type="submit"
+          value="Send"
           class="px-6 py-2 mt-4 text-white bg-custom-green rounded-md"
         >
           Enviar
