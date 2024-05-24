@@ -1,10 +1,8 @@
-"use client"
+"use client";
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
 function ContactForm() {
-
-
   function sendEmail(e) {
     e.preventDefault();
 
@@ -18,34 +16,19 @@ function ContactForm() {
         "pbL25b0JuSENRfmSN",
         alert("Su mensaje ha sido enviado, pronto te responderemos")
       )
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+      .then(res => console.log(res))
+      .catch(e => console.log(e));
     // navigate("/");
   }
 
   const form = useRef();
 
-  // const sendEmail = (e) => {
-  //   e.preventDefault();
-
-  //   emailjs.sendForm('service_asm3con', 'template_n68spek', form.current, 'pbL25b0JuSENRfmSN')
-  //     .then((result) => {
-  //         console.log(result.text);
-  //     }, (error) => {
-  //         console.log(error.text);
-  //     });
-  // };
-
-  
-
   return (
     <section class="bg-custom-contact pb-10 md:col-span-7 lg:col-span-8">
       <form
-      ref={form} onSubmit={sendEmail}
-      // onSubmit={(e) => sendEmail(e)}
-        // action=""
+        ref={form}
+        onSubmit={sendEmail}
         class="flex flex-col items-center max-w-4xl m-auto lg:py-3 lg:border-2 lg:border-custom-green "
-        
       >
         <group class="flex flex-col w-full max-w-3xl md:flex-row">
           <div class="flex flex-col w-full max-w-3xl  md:w-1/2">
@@ -129,7 +112,7 @@ function ContactForm() {
           Enviar
         </button>
       </form>
-      </section>
+    </section>
   );
 }
 
