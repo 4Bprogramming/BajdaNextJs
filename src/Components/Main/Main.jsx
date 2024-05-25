@@ -3,8 +3,7 @@ import Image from "next/image";
 import mainBanner from "../../../public/resources/mainImage.jpg";
 import nuestroEstudio from "../../../public/resources/nuestroEstudio.jpg";
 import GreenButton from "../Buttons/greenButton";
-import ContactForm from "../ContactForm/ContactForm";
-import ContactMedia from "../ConctactMedia/ContactMedia";
+import SendEmail from "../Services/SendEmail";
 
 function Main() {
   return (
@@ -73,13 +72,10 @@ function Main() {
         </section >
       </main>
 
-      <h2 class="text-5xl text-custom-green text-center  bg-custom-contact md:pb-8" id="contacto">Contacto</h2>
-      <contact-media-group class=" bg-custom-contact md:grid md:grid-cols-12 px-6 lg:gap-y-32 md:mb-4  ">
-        <ContactForm/>
-        <ContactMedia class="md:col-span-4"/>
-      </contact-media-group>
+      <h2 class="text-5xl text-custom-green text-center  bg-custom-contact md:pb-8 md:pt-8" id="contacto">Contacto</h2>
+      <SendEmail/>
     </>
   );
 }
 
-export default Main;
+export default Main;  
