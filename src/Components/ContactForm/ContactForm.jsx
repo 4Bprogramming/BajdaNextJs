@@ -11,8 +11,8 @@ function ContactForm() {
     e.preventDefault();
     const formData = new FormData(form.current);
     const formParams = Object.fromEntries(formData.entries());
-    const emailResponse = await sendEmail(formParams);
-    if (emailResponse === 200) {
+    const response = await sendEmail(formParams);
+    if (response === 200) {
       setEmailStatus("El correo electrónico se envió correctamente.");
     } else {
       setEmailStatus("Hubo un problema al enviar el correo electrónico.");
