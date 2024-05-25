@@ -1,33 +1,31 @@
 "use client";
-import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useRef,useState } from "react";
+import { sendEmail } from "@/Utils/emailservice";
 
 function ContactForm() {
-  function sendEmail(e) {
-    e.preventDefault();
+  const form = useRef();
+  const [emailStatus,setEmailStatus] = useState();
 
-    emailjs
-      .sendForm(
-        "service_asm3con",
-        "template_n68spek",
-        e.target,
-        /* "u1W0PSDVrZHmTdhGBrhGp", */
-        // '7lKAr0QQPtaCO09cU',
-        "pbL25b0JuSENRfmSN",
-        alert("Su mensaje ha sido enviado, pronto te responderemos")
-      )
-      .then(res => console.log(res))
-      .catch(e => console.log(e));
-    // navigate("/");
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+    const formData = new FormData(form.current);
+    const formParams = Object.fromEntries(formData.entries());
+    const emailResponse = await sendEmail(formParams);
+    if (emailResponse === 200) {
+      setEmailStatus("El correo electrónico se envió correctamente.");
+    } else {
+      setEmailStatus("Hubo un problema al enviar el correo electrónico.");
+    }
+    form.current.reset();
   }
 
-  const form = useRef();
 
   return (
     <section class="bg-custom-contact pb-10 md:col-span-7 lg:col-span-8">
       <form
         ref={form}
-        onSubmit={sendEmail}
+        onSubmit={handleSubmit}
         class="flex flex-col items-center max-w-4xl m-auto lg:py-3 lg:border-2 lg:border-custom-green "
       >
         <group class="flex flex-col w-full max-w-3xl md:flex-row">
@@ -38,8 +36,9 @@ function ContactForm() {
             <input
               type="text"
               id="nombre"
-              name="name"
+              name="nombre"
               placeholder="Ingrese Nombre"
+              required
               class=" h-14 mx-2 p-2 border-form-grey-border border-2 rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green focus-within:border-custom-green"
             />
           </div>
@@ -52,6 +51,7 @@ function ContactForm() {
               id="apellido"
               name="apellido"
               placeholder="Ingrese Apellido"
+              required
               class="h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
             />
           </div>
@@ -63,8 +63,9 @@ function ContactForm() {
           <input
             type="email"
             id="email"
-            name="correo"
-            placeholder="Ingrese Correo Electrónico"
+            name="email"
+            placeholder="Ingrese su email personal"
+            required
             class="h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
           />
         </div>
@@ -73,10 +74,11 @@ function ContactForm() {
             Teléfono
           </label>
           <input
-            type="tel"
+            type="number"
             id="telefono"
             name="telefono"
-            placeholder="Ingrese Teléfono"
+            placeholder="Ingrese número con característica. "
+            required
             class=" h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
           />
         </div>
@@ -89,6 +91,7 @@ function ContactForm() {
             id="asunto"
             name="asunto"
             placeholder="Ingrese Asunto"
+            required
             class=" h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
           />
         </div>
@@ -100,6 +103,7 @@ function ContactForm() {
             id="mensaje"
             name="mensaje"
             placeholder="Mensaje..."
+            required
             class=" mx-2 p-2 border-2 border-form-grey-border rounded-md md:min-h-28 focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green
              hover:border-custom-green"
           />
