@@ -1,21 +1,38 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import {getStorage , ref , uploadBytes ,getDownloadURL} from 'firebase/storage'
+import "firebase/auth";
+import "firebase/firestore";
+import {uuid} from 'uuid';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCyQ-Lf8YvQY-FMIhkv_fO1FMz4Ld8BGxI",
-  authDomain: "proyectos-90c6a.firebaseapp.com",
-  projectId: "proyectos-90c6a",
-  storageBucket: "proyectos-90c6a.appspot.com",
-  messagingSenderId: "650214500009",
-  appId: "1:650214500009:web:78815b9bce6350260eebb8",
-  measurementId: "G-SJCXELG1C5"
+  apiKey: "AIzaSyBi1JlCMfhk7hLCxoUQEQYjX44YheNv5AE",
+  authDomain: "holads.firebaseapp.com",
+  projectId: "holads",
+  storageBucket: "holads.appspot.com",
+  messagingSenderId: "111699694477",
+  appId: "1:111699694477:web:409aeacd405b4932b863c4",
+  measurementId: "G-G1N0F3YZ0K",
 };
 
+
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+
+export const db = getDatabase(app);
+export const auth = getAuth(app);
+
+export const storage = getStorage(app)
+export async function uploadFile (file){
+    const storageRef = ref(storage , uuid()) 
+    await uploadBytes(storageRef , file)
+    const url = await getDownloadURL(storageRef)
+    return url
+ }
