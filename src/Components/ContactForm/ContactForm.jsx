@@ -6,7 +6,6 @@ function ContactForm() {
   const form = useRef();
   const [emailStatus,setEmailStatus] = useState();
 
-
   const handleSubmit = async (e)=>{
     e.preventDefault();
     const formData = new FormData(form.current);

@@ -2,18 +2,18 @@
 import emailjs from "@emailjs/browser";
 export async function sendEmail(params) {
   try {
-    const {PUBLIC_KEY,TEMPLATE_ID,SERVICE_ID} = process.env;
-    emailjs.init(PUBLIC_KEY);
-    const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      asunto: params.asunto,
-      telefono: params.telefono,
+    emailjs.init("2iRnnETtfLHs-6H-8");
+    const response = await emailjs.send("service_zjilh3e", "template_33om5hh", {
       nombre: params.nombre,
       apellido: params.apellido,
       mensaje: params.mensaje,
       email: params.email,
-      reply_to: params.email
+      telefono: params.telefono,
+      asunto: params.asunto
     });
-    return response.status;
+    if(response){
+      return response.status;
+    }
   } catch (error) {
     return error
   }
