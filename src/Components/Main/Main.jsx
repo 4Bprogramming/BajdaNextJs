@@ -31,7 +31,7 @@ function Main() {
           </article>
         </section>
         <section class="flex flex-col items-center" id="nosotros">
-          <GreenButton text="Proyectos" style="mt-10 mb-10" />
+          <GreenButton  href="/proyectos" text="Proyectos" style="mt-10 mb-10" />
          
           <h2 class=" text-5xl text-custom-green" >Nosotros</h2>
         </section>
