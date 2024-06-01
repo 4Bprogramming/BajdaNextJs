@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { getProjects } from "./firebaseEndpoints/getProjects";
 import Card from "@/Components/ProjectCard/card";
+import GreenButton from "@/Components/Buttons/GreenButton"
 
 function page() {
   const [projects, setProjects] = useState([]);
@@ -14,6 +15,7 @@ function page() {
 
   return (
     <section>
+      <GreenButton  href="/" text="Atrás" style="my-3 ml-1 lg:ml-60" />
       <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5 lg:m-auto lg:max-w-5xl lg:my-2">
         <h1 className="text-4xl font-bold">Proyectos</h1>
         <p className=" text-justify pt-3">
@@ -32,7 +34,7 @@ function page() {
           plenitud.
         </p>
       </article>
-      <gallery className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 m-auto max-w-5xl gap-1">
+      <gallery className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
         {projects
           ? projects.map((project) => {
              
