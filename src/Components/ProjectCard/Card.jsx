@@ -6,14 +6,14 @@ import Image from "next/image";
 function Card(props) {
   return (
     <article
-      className={` flex flex-col justify-evenly border-4 items-center mx-1`}
+      className={` flex flex-col w-full justify-evenly border-4 items-center mx-1 max-w-[350px]`}
     >
       <header className="block relative w-full h-64">
         <Image
           src={props.img}
-          fill
+          fill 
           alt="Imagen de fondo"
-          className="object-contain"
+          className="object-cover"
         />
       </header>
       <main className="w-full">
@@ -34,7 +34,7 @@ function Card(props) {
         </div>
         <div className="w-full bg-custom-green text-black text-center">
           <h4 className=" text-[20px]">Ubicación</h4>
-          <p className="capitalize">{props.place}</p>
+          <p className="capitalize pr-1">{props.place}</p>
         </div>
       </footer>
     </article>
