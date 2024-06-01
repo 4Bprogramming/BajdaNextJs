@@ -3,9 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import {getStorage , ref , uploadBytes ,getDownloadURL} from 'firebase/storage'
-import "firebase/auth";
-import "firebase/firestore";
-import {uuid} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,7 +20,7 @@ const firebaseConfig = {
   measurementId: "G-G1N0F3YZ0K",
 };
 
-
+const uuid = uuidv4();
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -31,7 +29,7 @@ export const auth = getAuth(app);
 
 export const storage = getStorage(app)
 export async function uploadFile (file){
-    const storageRef = ref(storage , uuid()) 
+    const storageRef = ref(storage , uuid) 
     await uploadBytes(storageRef , file)
     const url = await getDownloadURL(storageRef)
     return url
