@@ -14,7 +14,7 @@ function page() {
 
   return (
     <section>
-      <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5">
+      <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5 lg:m-auto lg:max-w-5xl lg:my-2">
         <h1 className="text-4xl font-bold">Proyectos</h1>
         <p className=" text-justify pt-3">
           Cada proyecto se piensa como un desafío, en el cual se tiene en cuenta
@@ -32,10 +32,10 @@ function page() {
           plenitud.
         </p>
       </article>
-      <gallery className="grid grid-cols-1">
+      <gallery className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 m-auto max-w-5xl gap-1">
         {projects
           ? projects.map((project) => {
-              console.log(project)
+             
               return <Card
                 key={project.id}
                 img={project.image}
