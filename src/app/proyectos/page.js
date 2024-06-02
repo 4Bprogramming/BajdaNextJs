@@ -1,21 +1,14 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { getProjects } from "./firebaseEndpoints/getProjects";
+import React, {Suspense } from "react";
+
 import Card from "@/Components/ProjectCard/card";
-import GreenButton from "@/Components/Buttons/GreenButton"
+import GreenButton from "@/Components/Buttons/GreenButton";
+import Loading from "./loading";
 
 function page() {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    getProjects((projectsData) => {
-      setProjects(projectsData);
-    });
-  }, []);
-
   return (
     <section>
-      <GreenButton  href="/" text="Atrás" style="my-3 ml-1 lg:ml-60" />
+      <GreenButton href="/" text="Atrás" style="my-3 ml-1 lg:ml-60" />
       <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5 lg:m-auto lg:max-w-5xl lg:my-2">
         <h1 className="text-4xl font-bold">Proyectos</h1>
         <p className=" text-justify pt-3">
@@ -34,22 +27,10 @@ function page() {
           plenitud.
         </p>
       </article>
-      <gallery className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
-        {projects
-          ? projects.map((project) => {
-             
-              return <Card
-                key={project.id}
-                img={project.image}
-                link={`/proyectos/${project.id}`}
-                title={project.title}
-                area={project.area}
-                place={project.place}
-                year={project.year}
-              />;
-            })
-          : "Loading..."}
-      </gallery>
+
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <Card />
+      </Suspense>
     </section>
   );
 }
