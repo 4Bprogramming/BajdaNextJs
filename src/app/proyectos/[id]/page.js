@@ -1,8 +1,15 @@
-import React from 'react'
+'use client'
+import Project from '@/Components/ProjectComponent/Project'
+import React, {Suspense } from "react";
+
 
 function page() {
+ 
+
   return (
-    <div>aca van los componentes con el ID</div>
+    <Suspense fallback={<p>Esperando al PROSHHECTO</p>}>
+      <Project/>
+    </Suspense>
   )
 }
 
