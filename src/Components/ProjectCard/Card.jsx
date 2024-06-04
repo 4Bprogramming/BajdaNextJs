@@ -17,7 +17,7 @@ async function getProjectsFromFB() {
 function Card() {
   let projects = suspend(getProjectsFromFB);
   return (
-    <gallery className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
+    <picture className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
       {
         projects.map((project) => (
           <article
@@ -59,7 +59,7 @@ function Card() {
             </footer>
           </article>
         ))}
-    </gallery>
+    </picture>
   );
 }
 

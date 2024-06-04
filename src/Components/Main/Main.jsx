@@ -38,7 +38,7 @@ function Main() {
         <section>
           <article class="grid grid-cols-1  md:grid-cols-2 md:mb-14 md:mt-24 md:mr-32">
             <nuestro-estudio-left class="block p-2 md:p-6">
-              <Image src={nuestroEstudio} />
+              <Image src={nuestroEstudio} alt="nuestro estudio"/>
             </nuestro-estudio-left>
             <nuestro-estudio-right class="block relative p-2 md:p-6">
               <h3 class="text-3xl font-semibold uppercase mb-2">

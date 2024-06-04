@@ -27,9 +27,9 @@ function ContactForm() {
         onSubmit={handleSubmit}
         class="flex flex-col items-center max-w-4xl m-auto lg:py-3 lg:border-2 lg:border-custom-green "
       >
-        <group class="flex flex-col w-full max-w-3xl md:flex-row">
+        <hgroup class="flex flex-col w-full max-w-3xl md:flex-row">
           <div class="flex flex-col w-full max-w-3xl  md:w-1/2">
-            <label for="nombre" class="mb-1 text-lg pl-2">
+            <label htmlFor="nombre" class="mb-1 text-lg pl-2">
               Nombre
             </label>
             <input
@@ -42,7 +42,7 @@ function ContactForm() {
             />
           </div>
           <div class="flex flex-col w-full max-w-3xl md:w-1/2">
-            <label for="apellido" class="mb-1 text-lg pl-2">
+            <label htmlFor="apellido" class="mb-1 text-lg pl-2">
               Apellido
             </label>
             <input
@@ -54,9 +54,9 @@ function ContactForm() {
               class="h-14 mx-2 p-2 border-2 border-form-grey-border rounded-md focus:border-custom-green focus-visible:border-custom-green  active:border-custom-green hover:border-custom-green"
             />
           </div>
-        </group>
+        </hgroup>
         <div class="flex flex-col w-full max-w-3xl">
-          <label for="email" class="mb-1 text-lg pl-2">
+          <label htmlFor="email" class="mb-1 text-lg pl-2">
             Correo Electrónico
           </label>
           <input
@@ -69,7 +69,7 @@ function ContactForm() {
           />
         </div>
         <div class="flex flex-col w-full max-w-3xl">
-          <label for="telefono" class="mb-1 text-lg pl-2">
+          <label htmlFor="telefono" class="mb-1 text-lg pl-2">
             Teléfono
           </label>
           <input
@@ -82,7 +82,7 @@ function ContactForm() {
           />
         </div>
         <div class="flex flex-col w-full max-w-3xl">
-          <label for="asunto" class="mb-1 text-lg pl-2">
+          <label htmlFor="asunto" class="mb-1 text-lg pl-2">
             Asunto
           </label>
           <input
@@ -95,7 +95,7 @@ function ContactForm() {
           />
         </div>
         <div class="flex flex-col w-full max-w-3xl">
-          <label for="mensaje" class="mb-1 text-lg pl-2">
+          <label htmlFor="mensaje" class="mb-1 text-lg pl-2">
             Mensaje
           </label>
           <textarea
