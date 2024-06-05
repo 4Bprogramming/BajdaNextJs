@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import BurgerMenuButton from "../BurgeMenuButon/BurgerMenuButton";
+import BurgerMenuButton from "../BurgeMenuButton/BurgerMenuButton";
 import logo from "../../../public/resources/logo.png";
 
 function NavBar() {

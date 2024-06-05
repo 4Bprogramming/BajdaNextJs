@@ -1,7 +1,7 @@
 import React from 'react'
 // import {ContactForm,ContactMedia} from '../ContactForm';
-import ContactForm from '../ContactForm/ContactForm'
-import ContactMedia from '../ContactForm/ContactMedia'
+import ContactForm from '../Contact/ContactForm'
+import ContactMedia from '../Contact/ContactMedia'
 
 
 function SendEmail() {

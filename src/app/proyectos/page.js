@@ -1,7 +1,7 @@
 "use client";
 import React, {Suspense } from "react";
 
-import Card from "@/Components/ProjectCard/card";
+import Card from "@/Components/ProjectGallery/Card";
 import GreenButton from "@/Components/Buttons/GreenButton";
 import Loading from "./loading";
 
