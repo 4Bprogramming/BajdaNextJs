@@ -1,17 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { getProjects } from "@/app/proyectos/firebaseEndpoints/getProjects";
+
 import { suspend } from "suspend-react";
 
 async function getProjectsFromFB() {
-  try {
-    const projects = await getProjects();
-    return projects;
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-    throw error;
-  }
+  //Hacer un fetch directamente al endpoint
 }
 
 function Card() {

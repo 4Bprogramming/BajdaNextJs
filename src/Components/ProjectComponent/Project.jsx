@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getProjectById } from "@/app/proyectos/firebaseEndpoints/getProjectId";
 import { usePathname } from "next/navigation";
 import EmblaCarousel from "../Carousel/EmblaCarousel";
 import '../Carousel/embla.css'
@@ -12,17 +11,8 @@ function Project() {
 
 
   useEffect(() => {
-    async function getProject() {
-      const response = await getProjectById(projectId);
-      setProject(response);
-      
-    }
-    getProject();
+    //hacer un fetch al endpoint
   }, []);
-  console.log(project)
-
-
-
 
   return (
     <section>
@@ -34,13 +24,6 @@ function Project() {
    
       {project?.images?.length > 0 ? 
        <EmblaCarousel slides={project.images} options={OPTIONS} /> : <p>Aca va un Skeleton</p>}
-
-
-
-
-
-
-
 
     </section>
   );
