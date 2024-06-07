@@ -1,15 +1,14 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-
 import { suspend } from "suspend-react";
+import {getProjects} from "@/Utils/project-crud";
 
-async function getProjectsFromFB() {
-  //Hacer un fetch directamente al endpoint
-}
+
+
 
 function Card() {
-  let projects = suspend(getProjectsFromFB);
+  let projects = suspend(getProjects);
   return (
     <picture className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
       {
