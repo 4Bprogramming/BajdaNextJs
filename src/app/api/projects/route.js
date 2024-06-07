@@ -1,6 +1,6 @@
-const { PrismaClient } = require('@prisma/client')
-import { NextResponse } from 'next/server'
-const prisma = new PrismaClient()
+const { PrismaClient } = require("@prisma/client");
+import { NextResponse } from "next/server";
+const prisma = new PrismaClient();
 
 export async function GET(request) {
   try {
@@ -9,12 +9,15 @@ export async function GET(request) {
     if (id) {
       const project = await prisma.project.findUnique({
         where: {
-          id: parseInt(id),
-        },
+          id: parseInt(id)
+        }
       });
 
       if (!project) {
-        return NextResponse.json({ error: 'Project not found' }, { status: 404 });
+        return NextResponse.json(
+          { error: "Project not found" },
+          { status: 404 }
+        );
       }
 
       return NextResponse.json(project, { status: 200 });
@@ -24,27 +27,32 @@ export async function GET(request) {
     }
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch projects" },
+      { status: 500 }
+    );
   }
 }
 
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const { place, title } = body;
 
-  export async function POST(request) {
-    try {
-      const body = await request.json();
-      const { place, title } = body;
-  
-      const newProject = await prisma.project.create({
-        data: {
-          place,
-          title,
-        },
-      });
-      return NextResponse.json(newProject, { status: 201 });
-    } catch (error) {
-      console.error(error);
-      return NextResponse.json({ error: 'Failed to create project' }, { status: 500 });
-    } finally {
-      await prisma.$disconnect();
-    }
+    const newProject = await prisma.project.create({
+      data: {
+        place,
+        title
+      }
+    });
+    return NextResponse.json(newProject, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Failed to create project" },
+      { status: 500 }
+    );
+  } finally {
+    await prisma.$disconnect();
   }
+}
