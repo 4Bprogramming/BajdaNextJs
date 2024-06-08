@@ -3,28 +3,10 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function GET(request) {
-  try {
-    const { id } = request.params;
-
-    if (id) {
-      const project = await prisma.project.findUnique({
-        where: {
-          id: parseInt(id)
-        }
-      });
-
-      if (!project) {
-        return NextResponse.json(
-          { error: "Project not found" },
-          { status: 404 }
-        );
-      }
-
-      return NextResponse.json(project, { status: 200 });
-    } else {
-      const projects = await prisma.project.findMany();
+  try {    
+      const projects = await prisma.project.findMany({include:{images: true}});
       return NextResponse.json(projects, { status: 200 });
-    }
+    
   } catch (error) {
     console.error(error);
     return NextResponse.json(
@@ -37,14 +19,46 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { place, title } = body;
+    const {
+      place,  
+      title,  
+      area, 
+      bathrooms, 
+      description, 
+      garage,
+      image,    
+      images,  
+      rooms,  
+      type,    
+      year} = body;
+      
+      // console.log('body===>', body);
+      // Crear un array de objetos par
+const imageObjects = images.map(url => ({ url }));
 
     const newProject = await prisma.project.create({
       data: {
         place,
-        title
+        title,
+        images:{
+          create:imageObjects,
+        },
+        area, 
+        bathrooms, 
+        description, 
+        garage,
+        image,   
+        rooms,  
+        type,    
+        year
+      },
+      include: {
+        images: true, // Incluir las imágenes en la respuesta
       }
     });
+   
+
+
     return NextResponse.json(newProject, { status: 201 });
   } catch (error) {
     console.error(error);

@@ -28,7 +28,7 @@ export const db = getDatabase(app);
 export const auth = getAuth(app);
 
 export const storage = getStorage(app)
-export async function uploadFile (file){
+export async function uploadFile (file){// este transforma las imagenes en url
     const storageRef = ref(storage , uuid) 
     await uploadBytes(storageRef , file)
     const url = await getDownloadURL(storageRef)

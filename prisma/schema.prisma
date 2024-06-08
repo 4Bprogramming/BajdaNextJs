@@ -7,10 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Project {
   id      Int      @id @default(autoincrement())
   place   String   
   title   String
+  area    Int
+  bathrooms Int
+  description String
+  garage   Int
+  image    String
+  images   Image[]
+  rooms    Int
+  type     String
+  year     Int
   
-  
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String
+  projectId Int
+  project   Project  @relation(fields: [projectId], references: [id])
 }
