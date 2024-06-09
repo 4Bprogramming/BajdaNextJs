@@ -33,7 +33,7 @@ export async function POST(request) {
         description: body.description,
         garage: +body.garage,
         image: body.image,
-        rooms: +rooms,
+        rooms: +body.rooms,
         type: body.type,
         year: +body.year
       },
