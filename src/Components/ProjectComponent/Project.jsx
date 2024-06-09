@@ -3,17 +3,24 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import EmblaCarousel from "../Carousel/EmblaCarousel";
 import '../Carousel/embla.css'
+import { getProjectById } from "@/Utils/project-crud";
 
 function Project() {
   const projectId = usePathname().split("/").at(2);
   const [project, setProject] = useState({});
   const OPTIONS = { dragFree: true }
 
-
+  async function  getProject(projectId){
+    const response = await getProjectById(projectId)
+    setProject(response)
+    
+  }
   useEffect(() => {
     //hacer un fetch al endpoint
+    getProject(projectId)
   }, []);
-
+  
+  console.log('proyectos.images==>',project);
   return (
     <section>
       <div className="w-full p-8 border-l-[3px] border-l-custom-green ml-4 mt-4">
