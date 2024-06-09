@@ -2,13 +2,13 @@ import { baseURL } from "@/constants/constants";
 
 export async function getProjects() {
     try {
-        const response = await fetch(`${baseURL}api/projects`, {
+        const response = await fetch(`${baseURL}/api/projects`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
             },
         });
-        
+        console.log("response get==>",response)
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -22,7 +22,7 @@ export async function getProjects() {
 }
 export async function getProjectById(id) {
     try {
-        const response = await fetch(`${baseURL}api/projects/${id}`, {
+        const response = await fetch(`${baseURL}/api/projects/${id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -42,6 +42,7 @@ export async function getProjectById(id) {
 }
 export async function createProject(body) {
     try {
+        console.log("body create", body)
         const response = await fetch(`${baseURL}/api/projects`, {
             method: 'POST',
             body
