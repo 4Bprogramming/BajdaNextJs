@@ -41,18 +41,14 @@ export async function getProjectById(id) {
     }
 }
 export async function createProject(body) {
-
-    console.log('body para el post==>', body);
     try {
         const response = await fetch(`${baseURL}/api/projects`, {
             method: 'POST',
-            body: body,
+            body
         });
-        console.log('response==S', response);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-
         const data = await response.json();
         return data;
     } catch (error) {
