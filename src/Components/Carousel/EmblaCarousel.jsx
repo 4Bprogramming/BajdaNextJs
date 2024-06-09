@@ -6,13 +6,14 @@ import {
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
 import useEmblaCarousel from 'embla-carousel-react'
+import Image from 'next/image'
 
 const EmblaCarousel = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi)
-
+console.log('props==>', slides)
   const {
     prevBtnDisabled,
     nextBtnDisabled,
@@ -24,9 +25,9 @@ const EmblaCarousel = (props) => {
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((slide,index) => (
+          {slides?.map((slide,index) => (
             <div className="embla__slide" key={index}>
-              <img src={slide} />
+              <Image src={slide.url} alt='image' fill/>
             </div>
           ))}
         </div>
