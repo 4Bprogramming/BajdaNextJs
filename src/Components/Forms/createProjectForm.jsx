@@ -1,21 +1,23 @@
-'use client'
-import { createProject } from '@/Utils/project-crud';
-import React, { useState } from 'react';
+"use client";
+import { createProject } from "@/Utils/project-crud";
+import React, { useState } from "react";
+import { getImageUrls } from "@/Utils/getImageUrls";
 
-const FormComponent = () => {
-  // Define el estado para almacenar los valores del formulario
+const CreateProjectForm = () => {
+  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
-    place: '',
-    title: '',
-    area: '',
-    bathrooms: '',
-    description: '',
-    garage: '',
-    image: '',
+    place: "",
+    title: "",
+    area: "",
+    bathrooms: "",
+    description: "",
+    garage: "",
+    image: "",
     images: [],
-    rooms: '',
-    type: '',
-    year: ''
+    rooms: "",
+    type: "",
+    year: ""
   });
 
   // Manejador de cambios para los campos del formulario
@@ -26,39 +28,25 @@ const FormComponent = () => {
       [name]: value
     });
   };
-  const handleFileChange = (e) => {
-      const files = Array.from(e.target.files);
-      const urls = files.map(file => URL.createObjectURL(file));
-    if(e.target.name==="images"){
-        setFormData({
-          ...formData,
-          images: urls, // Almacena las URLs de los archivos seleccionados
-        });
-    }
-    else if(e.target.name==="image"){
-        setFormData({
-            ...formData,
-            image: urls.join(), // Almacena las URLs de los archivos seleccionados
-        });
-        
-    }
-};
-console.log("url image==>", formData.image);
 
   // Manejador del envío del formulario
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Aquí puedes enviar formData a tu endpoint
     try {
-        
-      const result = await createProject(formData);
-      console.log(result);
-      // Manejar la respuesta del servidor
+      const imageURLs = await getImageUrls(file, files);
+      const updatedFormData = { ...formData };
+
+      if (imageURLs) {
+        updatedFormData.image = imageURLs.shift(); 
+        updatedFormData.images = imageURLs; 
+        setFormData(updatedFormData);
+      }
+      const result = await createProject(JSON.stringify(updatedFormData));
+      
     } catch (error) {
-      console.error('Error submitting form:', error);
-      // Manejar el error
+      console.error("Error submitting form:", error);
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -105,27 +93,23 @@ console.log("url image==>", formData.image);
         placeholder="Garage"
       />
       <label>PORTADA</label>
-          <input
-            className="controls"
-            type="file"
-            // value={image}
-            accept="image/*"
-            name="image"
-            placeholder="Portada"
-            onChange={handleFileChange}
-          />
-          <br />
-          <label>IMAGENES</label>
-          <input
-            className="controls"
-            type="file"
-            // value={images}
-            name="images"
-            accept="image/*"
-            placeholder="Imagenes"
-            onChange={handleFileChange}
-            multiple
-          />
+      <input
+        type="file"
+        accept="image/*"
+        name="image"
+        placeholder="Portada"
+        onChange={(e) => setFile(e.target.files[0])}
+      />
+      <br />
+      <label>IMAGENES</label>
+      <input
+        type="file"
+        name="images"
+        accept="image/*"
+        placeholder="Imagenes"
+        multiple
+        onChange={(e) => setFiles([...e.target.files])}
+      />
       <input
         type="number"
         name="rooms"
@@ -152,4 +136,4 @@ console.log("url image==>", formData.image);
   );
 };
 
-export default FormComponent;
+export default CreateProjectForm;
