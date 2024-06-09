@@ -3,10 +3,11 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function GET(request) {
-  try {    
-      const projects = await prisma.project.findMany({include:{images: true}});
-      return NextResponse.json(projects, { status: 200 });
-    
+  try {
+    const projects = await prisma.project.findMany({
+      include: { images: true }
+    });
+    return NextResponse.json(projects, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
@@ -19,45 +20,27 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const {
-      place,  
-      title,  
-      area, 
-      bathrooms, 
-      description, 
-      garage,
-      image,    
-      images,  
-      rooms,  
-      type,    
-      year} = body;
-      
-      // console.log('body===>', body);
-      // Crear un array de objetos par
-const imageObjects = images.map(url => ({ url }));
-
+    const imageObjects = body.images.map((url) => ({ url }));
     const newProject = await prisma.project.create({
       data: {
-        place,
-        title,
-        images:{
-          create:imageObjects,
+        place: body.place,
+        title: body.title,
+        images: {
+          create: imageObjects
         },
-        area, 
-        bathrooms, 
-        description, 
-        garage,
-        image,   
-        rooms,  
-        type,    
-        year
+        area: +body.area,
+        bathrooms: +body.bathrooms,
+        description: body.description,
+        garage: +body.garage,
+        image: body.image,
+        rooms: +rooms,
+        type: body.type,
+        year: +body.year
       },
       include: {
-        images: true, // Incluir las imágenes en la respuesta
+        images: true // Incluir las imágenes en la respuesta
       }
     });
-   
-
 
     return NextResponse.json(newProject, { status: 201 });
   } catch (error) {
