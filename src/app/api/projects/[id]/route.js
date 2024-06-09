@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export async function GET(request, {params}){
     const id = parseInt(params.id)
-    console.log('params===>', id);
+
     try {
         const project = await prisma.project.findUnique({
             where: {
