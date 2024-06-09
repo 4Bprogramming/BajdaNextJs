@@ -10,9 +10,9 @@ import {getProjects} from "@/Utils/project-crud";
 function Card() {
   let projects = suspend(getProjects);
   return (
-    <picture className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
+    <div className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
       {
-        projects.map((project) => (
+        projects?.map((project) => (
           <article
             key={project.id}
             className={` flex flex-col w-full justify-evenly border-4 items-center mx-1 max-w-[350px]`}
@@ -52,7 +52,7 @@ function Card() {
             </footer>
           </article>
         ))}
-    </picture>
+    </div>
   );
 }
 
