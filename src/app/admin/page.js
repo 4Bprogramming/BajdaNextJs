@@ -1,12 +1,12 @@
 // import FormAdd from "@/Components/FormAddNewProject/Form";
-import FormComponent from "@/Components/FormAddNewProject/Form1";
+import CreateProjectForm from "@/Components/Forms/createProjectForm";
 
 
 export default function Admin() {
     return (
       <>
         {/* <FormAdd/> */}
-        <FormComponent/>
+        <CreateProjectForm/>
         
       </>
     );
