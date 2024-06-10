@@ -7,7 +7,7 @@ import Loading from "./loading";
 
 function page() {
   return (
-    <section>
+    <section className="mb-3">
       <GreenButton href="/" text="Atrás" style="my-3 ml-1 lg:ml-60" />
       <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5 lg:m-auto lg:max-w-5xl lg:my-2">
         <h1 className="text-4xl font-bold">Proyectos</h1>
