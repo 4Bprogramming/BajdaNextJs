@@ -44,7 +44,7 @@ export async function getProjectById(id) {
 }
 export async function createProject(body) {
     try {
-        console.log("body create", body)
+        
         const response = await fetch(`${baseURL}/api/projects`, {
             method: 'POST',
             body
