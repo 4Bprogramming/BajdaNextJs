@@ -21,6 +21,8 @@ export async function getProjects() {
     }
 }
 export async function getProjectById(id) {
+    console.log('entree',id);
+
     try {
         const response = await fetch(`${baseURL}/api/projects/${id}`, {
             method: 'GET',
@@ -56,4 +58,26 @@ export async function createProject(body) {
         console.error(error); 
     }
 }
+export async function updateProject(body) {
+    try {
+        console.log("body create", body)
+        const response = await fetch(`${baseURL}/api/projects/${id}`, {
+            method: 'PUT',
+            body
+          });
+        // const response = await fetch(`${baseURL}/api/projects`, {
+        //     method: 'POST',
+        //     body
+        // });
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error); 
+    }
+}
+
+
 
