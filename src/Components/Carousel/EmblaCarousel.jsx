@@ -13,21 +13,21 @@ const EmblaCarousel = (props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi)
-console.log('props==>', slides)
+
   const {
     prevBtnDisabled,
     nextBtnDisabled,
     onPrevButtonClick,
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
-
+ 
   return (
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides?.map((slide,index) => (
             <div className="embla__slide" key={index}>
-              <Image src={slide.url} alt='image' fill/>
+              <Image src={slide.url} alt='Imagen de la casa' fill/>
             </div>
           ))}
         </div>
