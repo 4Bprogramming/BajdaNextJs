@@ -1,21 +1,6 @@
-// export async function getImageUrls(file, files) {
-//   const formData = new FormData();
-//   formData.append("image", file);
-//   for (let i = 0; i < files.length; i++) {
-//     formData.append("imagesArray", files[i]);
-//   }
-//   //Mando los archivos de imagen al back para que me devuelva urls
-//   const response = await fetch("/api/uploadCloudinary", {
-//     method: "POST",
-//     body: formData
-//   });
-//   if (response.ok) {
-//     const urls = await response.json();
-//     return urls
-//   } else {
-//     console.log("Oops! ", response.statusText);
-//   }
-// }
+
+import { CLOUDINARY } from "@/constants/constants";
+
 export async function getImageUrls(file, files = []) {
   const formData = new FormData();
   
@@ -34,7 +19,7 @@ export async function getImageUrls(file, files = []) {
   console.log(formData);
 
   // Mando los archivos de imagen al backend para que me devuelva URLs
-  const response = await fetch("/api/uploadCloudinary", {
+  const response = await fetch(CLOUDINARY, {
     method: "POST",
     body: formData
   });
@@ -48,7 +33,7 @@ export async function getImageUrls(file, files = []) {
 }
 export async function deleteImage(imageId, projectId) {
   console.log('imageId==>', imageId);
-  const response = await fetch('/api/uploadCloudinary', {
+  const response = await fetch(CLOUDINARY, {
     method: 'DELETE',
     
     body: JSON.stringify({ imageId, projectId }),

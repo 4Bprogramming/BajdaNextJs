@@ -1,7 +1,7 @@
 "use client";
 import { createProject } from "@/Utils/project-crud";
 import React, { useState } from "react";
-import { getImageUrls } from "@/Utils/getImageUrls";
+import { getImageUrls } from "@/Utils/cloudinary-crud";
 
 const CreateProjectForm = () => {
   const [file, setFile] = useState(null);

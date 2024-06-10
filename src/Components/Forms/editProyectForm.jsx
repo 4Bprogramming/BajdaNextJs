@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from 'react';
 import { FaTrash, FaPlus } from 'react-icons/fa';
-import { deleteImage, getImageOneUrls, getImageUrls } from '@/Utils/getImageUrls';
+import { deleteImage, getImageUrls } from '@/Utils/cloudinary-crud';
 
 const EditProjectForm = ({ project, onSubmit }) => {
-  console.log("project en form edit=>", project);
+ 
 
   const [formData, setFormData] = useState({ ...project });
   const [imageFile, setImageFile] = useState('');
