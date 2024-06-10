@@ -1,7 +1,7 @@
 "use client";
 import { createProject } from "@/Utils/project-crud";
 import React, { useState } from "react";
-import { getImageUrls } from "@/Utils/cloudinary-crud";
+import { getImageCloudinaryObject } from "@/Utils/cloudinary-crud";
 
 const CreateProjectForm = () => {
   const [file, setFile] = useState(null);
@@ -13,7 +13,6 @@ const CreateProjectForm = () => {
     bathrooms: "",
     description: "",
     garage: "",
-    image: "",
     images: [],
     rooms: "",
     type: "",
@@ -33,12 +32,11 @@ const CreateProjectForm = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const imageURLs = await getImageUrls(file, files);
+      const imageCloudinaryObject = await getImageCloudinaryObject(file, files);
       const updatedFormData = { ...formData };
 
-      if (imageURLs) {
-        updatedFormData.image = imageURLs.shift(); 
-        updatedFormData.images = imageURLs; 
+      if (imageCloudinaryObject) {
+        updatedFormData.images = imageCloudinaryObject; 
         setFormData(updatedFormData);
       }
       const result = await createProject(JSON.stringify(updatedFormData));

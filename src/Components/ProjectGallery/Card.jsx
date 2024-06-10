@@ -9,6 +9,7 @@ import {getProjects} from "@/Utils/project-crud";
 
 function Card() {
   let projects = suspend(getProjects);
+  console.log(projects)
   return (
     <div className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
       {
@@ -18,8 +19,9 @@ function Card() {
             className={` flex flex-col w-[98%] justify-evenly border-4 items-center mx-1 max-w-[350px]`}
           >
             <header className="block relative w-full h-64">
+              
               <Image
-                src={project.image}
+                src={project.images?.find(image => image.main)?.url}
                 fill
                 alt="Imagen de una casa"
                 className="object-cover"

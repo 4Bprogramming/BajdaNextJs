@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { FaTrash, FaPlus } from 'react-icons/fa';
-import { deleteImage, getImageUrls } from '@/Utils/cloudinary-crud';
+import { deleteImage, getImageCloudinaryObject } from '@/Utils/cloudinary-crud';
 
 const EditProjectForm = ({ project, onSubmit }) => {
  
@@ -23,7 +23,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
 
   const handleImageChange = async (e) => { //esta ok
     // console.log('target==>', e.target.files[0]);
-    const imageURLs = await getImageUrls(e.target.files[0]);
+    const imageURLs = await getImageCloudinaryObject(e.target.files[0]);
     // console.log('imageURL', imageURLs);
     setImageFile(imageURLs);
   };
@@ -32,7 +32,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
       console.log('e cdo agrego imagenes al grupo ==>', e.target.files)
     const files = Array.from(e.target.files);
     console.log('las imagenes transformadas en Array', files);
-    const newImages= await getImageUrls(0,files) ;
+    const newImages= await getImageCloudinaryObject(0,files) ;
     console.log('newImages==>', newImages);
     setImages([...images, ...newImages]);
   };
