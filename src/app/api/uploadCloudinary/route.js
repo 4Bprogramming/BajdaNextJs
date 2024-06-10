@@ -3,15 +3,6 @@ import { v2 as cloudinary } from "cloudinary";
 import { extractPublicId } from "./extractPublicId";
 
 cloudinary.config({
-  /* CREDENCIALES CHARLIE
-   cloud_name: "neleon10",
-  api_key: "759833736964718",
-  api_secret: "knPWwmzw6aEZIWVeE3yPY5NfhNA"
-  */
-  //CREDENCIALES GISE
-  // cloud_name: "dsgxo6vlo",
-  // api_key: "961237173865746",
-  // api_secret: "y-sJjwF0mnLKNy23yGl_Q_xiV_A"
   cloud_name: process.env.NEXT_PUBLIC_CLOUDNAME,
   api_key: process.env.NEXT_PUBLIC_APIKEY,
   api_secret: process.env.NEXT_PUBLIC_SECRET
