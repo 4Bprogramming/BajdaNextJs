@@ -20,7 +20,6 @@ function Project() {
     getProject(projectId)
   }, []);
   
-  console.log('proyectos.images==>',project);
   return (
     <section>
       <div className="w-full p-8 border-l-[3px] border-l-custom-green ml-4 mt-4">
