@@ -15,14 +15,16 @@ function Card() {
         projects?.map((project) => (
           <article
             key={project.id}
-            className={` flex flex-col w-full justify-evenly border-4 items-center mx-1 max-w-[350px]`}
+            className={` flex flex-col w-[98%] justify-evenly border-4 items-center mx-1 max-w-[350px]`}
           >
             <header className="block relative w-full h-64">
               <Image
                 src={project.image}
                 fill
-                alt="Imagen de fondo"
+                alt="Imagen de una casa"
                 className="object-cover"
+                sizes="100%"
+                
               />
             </header>
             <main className="w-full">
