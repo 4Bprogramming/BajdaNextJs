@@ -20,7 +20,15 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const imageObjects = body.images.map((url) => ({ url }));
+    
+    const imageObjects = body.images.map((object, index) => {
+     return{
+        url:object.secure_url,
+        main: index == 0 ? true : false,
+        cloudinaryID:object.public_id
+      }
+    });
+
     const newProject = await prisma.project.create({
       data: {
         place: body.place,
@@ -32,7 +40,6 @@ export async function POST(request) {
         bathrooms: +body.bathrooms,
         description: body.description,
         garage: +body.garage,
-        image: body.image,
         rooms: +body.rooms,
         type: body.type,
         year: +body.year
