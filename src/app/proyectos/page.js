@@ -4,6 +4,7 @@ import React, {Suspense } from "react";
 import Card from "@/Components/ProjectGallery/Card";
 import GreenButton from "@/Components/Buttons/GreenButton";
 import Loading from "./loading";
+import CardSkeleton from "@/Components/Skeletons/CardSkeleton";
 
 function page() {
   return (
@@ -27,10 +28,7 @@ function page() {
           plenitud.
         </p>
       </article>
-
-      <Suspense fallback={<p>Loading feed...</p>}>
         <Card />
-      </Suspense>
     </section>
   );
 }
