@@ -7,31 +7,27 @@ const EditProjectForm = ({ project, onSubmit }) => {
  
 
   const [formData, setFormData] = useState({ ...project });
-  const [imageFile, setImageFile] = useState('');
+  const [imageFile, setImageFile] = useState(project.images.find(image => image.main));
   const [images, setImages] = useState(project.images?.map(image => image) || []);
+  const [deleteImageDB, setDeleteImageDB]=useState([])
 
-  useEffect(() => {
-    if (project.image) {
-      setImageFile(project.image);
-    }
-  }, [project.image]);
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleImageChange = async (e) => { //esta ok
-    // console.log('target==>', e.target.files[0]);
+    console.log('target==>', e.target.files[0]);
     const imageURLs = await getImageCloudinaryObject(e.target.files[0]);
-    // console.log('imageURL', imageURLs);
+    console.log('imageURL', imageURLs);
     setImageFile(imageURLs);
   };
 
   const handleImagesChange = async(e) => {
-      console.log('e cdo agrego imagenes al grupo ==>', e.target.files)
+      // console.log('e cdo agrego imagenes al grupo ==>', e.target.files)
     const files = Array.from(e.target.files);
-    console.log('las imagenes transformadas en Array', files);
+    // console.log('las imagenes transformadas en Array', files);
     const newImages= await getImageCloudinaryObject(0,files) ;
     console.log('newImages==>', newImages);
     setImages([...images, ...newImages]);
@@ -39,20 +35,21 @@ const EditProjectForm = ({ project, onSubmit }) => {
 
   const handleRemoveImage = (index) => {
     const deleteToImage=images.filter((_, i) => i === index)
-    if(deleteToImage[0].url){
-        setImages(images.filter((_, i) => i !== index));
+    if(deleteToImage[0].secure_url){
+      deleteImage(deleteToImage[0].public_id)
+      setImages(images.filter((_, i) => i !== index));
     }
-    console.log('esta imagen voy a eliminar del grupo de imagenes==>', deleteToImage);
-    deleteImage(deleteToImage[0])
+    setDeleteImageDB([...deleteImageDB, deleteToImage])
     setImages(images.filter((_, i) => i !== index));
   };
 
   const handleRemoveMainImage = () => { //Este esta ok
-    console.log("remove image");
-    if (imageFile !== project.image) {
-        deleteImage(imageFile);
-        setImageFile('');
+    
+    if (imageFile.main) {
+      setDeleteImageDB([...deleteImageDB, i])
+      setImageFile('');
     } else {
+      deleteImage(imageFile[0].public_id);
       setImageFile('');
     }
   };
@@ -67,7 +64,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
     onSubmit(updatedProject);
   };
 
-  console.log('imagesss==>', images);
+ 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Form fields */}
@@ -135,7 +132,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
         <div className="mt-2 flex items-center">
           {imageFile ? (
             <div className="relative m-2">
-              <img src={imageFile} alt="Project Image" className="w-20 h-20 object-cover" />
+              <img src={typeof imageFile === 'object' && imageFile.main? imageFile.url :imageFile[0].secure_url } alt="Project Image" className="w-20 h-20 object-cover" />
               <button
                 type="button"
                 onClick={handleRemoveMainImage}
@@ -172,7 +169,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
         <div className="mt-2 flex flex-wrap">
           {images.map((image, index) => (
             <div key={index} className="relative m-2">
-              <img  src={typeof image === 'object' && image.url ? image.url : image}
+                  <img  src={typeof image === 'object' && image.secure_url? image.secure_url : image.url}
                 alt={`Imagen del proyecto`}
                 className="w-20 h-20 object-cover" />
               <button

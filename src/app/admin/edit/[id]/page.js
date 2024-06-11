@@ -1,5 +1,5 @@
 'use client'
-import { useRouter } from 'next/navigation';
+
 import { useEffect, useState } from 'react';
 import { usePathname } from "next/navigation";
 import { getProjectById } from '@/Utils/project-crud';
@@ -20,22 +20,7 @@ const EditProjectPage = () => {
     getProject(projectId)
   }, []);
 
-  // useEffect(() => {
-  //   const {id} = router.query;
-
-  //   if (id) {
-  //     // Aquí deberías reemplazar con una llamada real para obtener los datos del proyecto
-  //     const fetchProject = async () => {
-  //       // Suponiendo que tienes una API para obtener un proyecto por ID
-  //       const response = await fetch(`/api/projects/${id}`);
-  //       const data = await response.json();
-  //       setProject(data);
-  //     };
-
-  //     fetchProject();
-  //   }
-  // }, [router.query]);
-
+  
   const handleSubmit = async (updatedProject) => {
     const id = router.query.id;
 

@@ -51,15 +51,15 @@ export async function POST(request) {
 export async function DELETE(req) {
   try {
     const body = await req.text();
-    const { imageId, projectId } = JSON.parse(body);
-    if (!imageId && !projectId) {
+    const { publicId, projectId } = JSON.parse(body);
+    console.log('public_ID===>', publicId);
+    if (!publicId && !projectId) {
       return NextResponse.json(
         { error: "Image ID is required" },
         { status: 400 }
       );
     }
-    if (imageId) {
-      const publicId = extractPublicId(imageId);
+    if (publicId) {
       const response = await cloudinary.uploader.destroy(publicId);
       if (response === "not found") {
         return NextResponse.json({ message: "Not found" }, { status: 400 });
@@ -71,7 +71,7 @@ export async function DELETE(req) {
         where: { id: projectId },
         data: {
           images: {
-            disconnect: { id: imageId }
+            disconnect: { id: publicId }
           }
         }
       });
