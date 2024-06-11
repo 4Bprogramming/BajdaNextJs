@@ -1,9 +1,8 @@
+import ProyectosSkeleton from '@/Components/Skeletons/ProyectosSkeleton'
 import React from 'react'
 
 function Loading() {
-  return (
-    <div>Cargando por las dudas...</div>
-  )
+  return <ProyectosSkeleton/>
 }
 
 export default Loading  
