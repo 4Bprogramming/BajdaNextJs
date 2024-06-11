@@ -1,14 +1,33 @@
 "use client";
+import { useEffect,useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { suspend } from "suspend-react";
 import {getProjects} from "@/Utils/project-crud";
-
-
-
+import CardSkeleton from "../Skeletons/CardSkeleton";
 
 function Card() {
-  let projects = suspend(getProjects);
+  const [projects, setProjects] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const projectsData = await getProjects();
+        setProjects(projectsData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  if (loading) {
+    return <CardSkeleton />;
+  }
   
   return (
     <div className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
