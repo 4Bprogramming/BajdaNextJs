@@ -5,6 +5,7 @@ import EmblaCarousel from "../Carousel/EmblaCarousel";
 import '../Carousel/embla.css'
 import { getProjectById } from "@/Utils/project-crud";
 import GreenButton from "@/Components/Buttons/GreenButton";
+import EmblaCarouselSkeleton from "../Skeletons/EmblaCarouselSkeleton";
 
 function Project() {
   const projectId = usePathname().split("/").at(2);
@@ -17,7 +18,7 @@ function Project() {
     
   }
   useEffect(() => {
-    //hacer un fetch al endpoint
+   
     getProject(projectId)
   }, []);
   
@@ -28,9 +29,8 @@ function Project() {
         <p className=" capitalize">{project.place}</p>
       </div>
       {/* carousel */}
-   
       {project?.images?.length > 0 ? 
-       <EmblaCarousel slides={project.images} options={OPTIONS} /> : <p>Aca va un Skeleton</p>}
+       <EmblaCarousel slides={project.images} options={OPTIONS} /> : <EmblaCarouselSkeleton/>}
        <GreenButton href={`/admin/edit/${projectId}` }text="Editar" style="my-3 ml-1 lg:ml-60" />
 
     </section>

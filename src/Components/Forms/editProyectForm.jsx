@@ -29,7 +29,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
     const files = Array.from(e.target.files);
     // console.log('las imagenes transformadas en Array', files);
     const newImages= await getImageCloudinaryObject(0,files) ;
-    console.log('newImages==>', newImages);
+    
     setImages([...images, ...newImages]);
   };
 

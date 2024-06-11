@@ -8,7 +8,7 @@ import EditProjectForm from '@/Components/Forms/editProyectForm';
 const EditProjectPage = () => {
   const projectId = usePathname().split("/").at(3);
   const [project, setProject] = useState(null);
-  console.log('id en edit==>', projectId);
+  
 
   async function  getProject(projectId){
     const response = await getProjectById(projectId)

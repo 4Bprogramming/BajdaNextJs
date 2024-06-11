@@ -1,16 +1,8 @@
-'use client'
-import Project from '@/Components/ProjectComponent/Project'
-import React, {Suspense } from "react";
-
+"use client";
+import Project from "@/Components/ProjectComponent/Project";
 
 function page() {
- 
-
-  return (
-    <Suspense fallback={<p>Esperando al PROSHHECTO</p>}>
-      <Project/>
-    </Suspense>
-  )
+  return <Project />;
 }
 
-export default page
+export default page;

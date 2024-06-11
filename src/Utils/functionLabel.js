@@ -35,7 +35,7 @@ export const handleTitle = (e) => {
       console.log("Error image");
     }
     // setImage(e.target.value);
-    console.log("imagenes==>",image);
+    
   };
   export const handlePlace = (e) => {
     return proyecto.place(e.target.value);
@@ -63,30 +63,30 @@ export const handleTitle = (e) => {
 
   // const handleImgs = async (e) => {
   //   try {
-  //     console.log("e==>",e);
+  //     
   //     let urls = await uploadFile(e);
   //     setImages(urls);
   //   } catch (error) {
-  //     console.log("Error image");
+  //     
   //   }
   // };
-  // console.log('varias imagenes==>', images);
+  // 
 
  export const handleImgs = async (e) => {
     try {
-      console.log("e==>",e);
+      
       const arrayImages=Object.entries(e.target.files)
-      console.log('ARRAY IMAGENES==>', typeof arrayImages);
-      console.log('ARRAY IMAGENES==>', arrayImages);
+      
+      
       let urls =  await Promise.all(arrayImages.map(async e=>{
-        // console.log("cada imagen==>",e[1]);
+        // 
         return await uploadFile(e[1]) ;
 
       }))
-      console.log(urls, "URLSSSSSSSSSS");
+      
       return proyecto.images(urls);
     } catch (error) {
-      console.log("Error image");
+      
     }
   };
  
@@ -138,14 +138,14 @@ export const handleTitle = (e) => {
     const projectSend=  await postProject(proyecto)
 
       resetFields();
-      console.log('project subido con exito==>', projectSend);
+      
       return project
     } else {
       proyecto.showError("Introduzca sus datos");
-      console.log("validation error");
+      
     }
   };
 
  export const fetchUser = () => {
-    console.log("Fetching all Users");
+    
 }
