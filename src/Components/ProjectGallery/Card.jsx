@@ -9,7 +9,7 @@ import {getProjects} from "@/Utils/project-crud";
 
 function Card() {
   let projects = suspend(getProjects);
-  console.log(projects)
+  
   return (
     <div className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
       {

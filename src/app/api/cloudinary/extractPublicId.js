@@ -1,6 +1,6 @@
 export function extractPublicId(url) {
     // Asumiendo que la URL sigue el formato estándar de Cloudinary
-    console.log('url en ectract===>',url);
+    
     
     if(!Array.isArray(url)){
     const parts = url[0].split('/');

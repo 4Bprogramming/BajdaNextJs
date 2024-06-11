@@ -21,7 +21,7 @@ export async function getProjects() {
     }
 }
 export async function getProjectById(id) {
-    console.log('entree',id);
+    
 
     try {
         const response = await fetch(`${baseURL}/api/projects/${id}`, {
@@ -60,7 +60,7 @@ export async function createProject(body) {
 }
 export async function updateProject(body) {
     try {
-        console.log("body create", body)
+        
         const response = await fetch(`${baseURL}/api/projects/${id}`, {
             method: 'PUT',
             body

@@ -22,18 +22,18 @@ const EditProjectForm = ({ project, onSubmit }) => {
   };
 
   const handleImageChange = async (e) => { //esta ok
-    // console.log('target==>', e.target.files[0]);
+    // 
     const imageURLs = await getImageCloudinaryObject(e.target.files[0]);
-    // console.log('imageURL', imageURLs);
+    // 
     setImageFile(imageURLs);
   };
 
   const handleImagesChange = async(e) => {
-      console.log('e cdo agrego imagenes al grupo ==>', e.target.files)
+      
     const files = Array.from(e.target.files);
-    console.log('las imagenes transformadas en Array', files);
+    
     const newImages= await getImageCloudinaryObject(0,files) ;
-    console.log('newImages==>', newImages);
+    
     setImages([...images, ...newImages]);
   };
 
@@ -42,13 +42,13 @@ const EditProjectForm = ({ project, onSubmit }) => {
     if(deleteToImage[0].url){
         setImages(images.filter((_, i) => i !== index));
     }
-    console.log('esta imagen voy a eliminar del grupo de imagenes==>', deleteToImage);
+    
     deleteImage(deleteToImage[0])
     setImages(images.filter((_, i) => i !== index));
   };
 
   const handleRemoveMainImage = () => { //Este esta ok
-    console.log("remove image");
+    
     if (imageFile !== project.image) {
         deleteImage(imageFile);
         setImageFile('');
@@ -67,7 +67,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
     onSubmit(updatedProject);
   };
 
-  console.log('imagesss==>', images);
+  
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Form fields */}

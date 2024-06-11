@@ -25,7 +25,7 @@ export async function getImageCloudinaryObject(file, files = []) {
   }
 }
 export async function deleteImage(imageId, projectId) {
-  console.log("imageId==>", imageId);
+  
   const response = await fetch(CLOUDINARY, {
     method: "DELETE",
 
