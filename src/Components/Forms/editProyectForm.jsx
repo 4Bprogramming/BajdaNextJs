@@ -191,7 +191,7 @@ const handleSubmit = async (e) => {
 };
   
     if (!project) {
-      return <div>Loading...</div>;
+      return <div>SKELETON DE EDIT</div>;
     }
   
 
