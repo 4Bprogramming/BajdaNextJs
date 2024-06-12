@@ -2,16 +2,61 @@
 import { useEffect, useState } from 'react';
 import { FaTrash, FaPlus } from 'react-icons/fa';
 import { deleteImage, getImageCloudinaryObject } from '@/Utils/cloudinary-crud';
+import { usePathname } from 'next/navigation';
+import { getProjectById, updateProject } from '@/Utils/project-crud';
 
-const EditProjectForm = ({ project, onSubmit }) => {
- 
-
-  const [formData, setFormData] = useState({ ...project });
-  const [imageFile, setImageFile] = useState(project.images.find(image => image.main));
-  const [images, setImages] = useState(project.images?.map(image => image) || []);
+const EditProjectForm = () => {
+  const projectId = usePathname().split("/").at(3);
+  const [project, setProject] = useState(null);
+    // Define all possible fields in the initial state to prevent uncontrolled to controlled warning
+  const initialFormState = {
+    place: '',
+    title: '',
+    area: 0,
+    bathrooms: 0,
+    description: '',
+    garage: 0,
+    image: '',
+    images: [],
+    rooms: 0,
+    type: '',
+    year: 0,
+  };
+ // Verifica que project esté definido, si no, inicializa con un objeto vacío
+ const safeProject = project || {};
+ // Inicializa las imágenes con un array vacío si no están definidas
+ const projectImages = safeProject.images || [];
+ const [formData, setFormData] = useState(initialFormState);
+  const [images, setImages] = useState([]);
+  const [imageFile, setImageFile] = useState({});
   const [deleteImageDB, setDeleteImageDB]=useState([])
 
- 
+  
+
+
+  useEffect(() => {
+    // Simula la obtención de datos del proyecto
+    async function  getProject(projectId){
+      const response = await getProjectById(projectId)
+      setProject(response)
+    }
+    getProject(projectId)
+  }, [projectId]);
+
+  /* usar dos useEffect separados permite manejar de manera clara y efectiva la obtención de datos y la sincronización del estado del formulario, mejorando la claridad y la mantenibilidad del código.*/
+  useEffect(() => {
+    if (project) {
+      setFormData({ ...project })
+      const mainImages = project.images.filter(image => image.main === true);
+      const nonMainImages = project.images.filter(image => image.main === false);;
+      setImageFile(mainImages[0])
+      setImages(nonMainImages)
+    }
+  }, [project]);
+
+ console.log('formDate', formData);
+ console.log('images', images);
+ console.log('imageFile', imageFile);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -46,7 +91,7 @@ const EditProjectForm = ({ project, onSubmit }) => {
   const handleRemoveMainImage = () => { //Este esta ok
     
     if (imageFile.main) {
-      setDeleteImageDB([...deleteImageDB, i])
+      setDeleteImageDB([...deleteImageDB])
       setImageFile('');
     } else {
       deleteImage(imageFile[0].public_id);
@@ -54,15 +99,58 @@ const EditProjectForm = ({ project, onSubmit }) => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const updatedProject = {
-      ...formData,
-      image: imageFile,
-      images: images.map(image => image.file || image.url),
-    };
-    onSubmit(updatedProject);
-  };
+    // onSubmit(updatedProject);
+ const handleSubmit = async (e) => {
+      e.preventDefault();
+      const id = project.id;
+      let updatedProject = {
+        ...formData,
+        images: [],
+      };
+      const mainImage=[]
+      try {
+        if(imageFile[0]){
+          console.log('imageFile[0]', imageFile[0]);
+          imageFile[0].main=true
+          mainImage.push(imageFile[0])
+        }
+        const otherImages=images.filter(image => image.secure_url) 
+        if (mainImage.length > 0) {
+          updatedProject.images.push(...mainImage);
+        }
+        console.log('otherImage', otherImages);
+        
+        if (otherImages.length > 0) {
+          updatedProject.images.push(...otherImages);
+        }
+        console.log('images al upload', updatedProject.images);
+        const response = await updateProject(updatedProject,id)
+        console.log('respuesta que llego al front==>', mainImage);
+        
+      } catch (error) {
+        
+        console.log('error', error);
+      }
+      // if (response.ok) {
+      //   // router.push(`/projects/${id}`);
+        
+      // } else {
+      //   console.error('Error updating project');
+      // }
+  }
+    
+        //   method: 'PUT',
+        //   body: formData,
+        // });
+  
+  
+    
+      //};
+  
+    if (!project) {
+      return <div>Loading...</div>;
+    }
+  
 
  
   return (
@@ -132,7 +220,9 @@ const EditProjectForm = ({ project, onSubmit }) => {
         <div className="mt-2 flex items-center">
           {imageFile ? (
             <div className="relative m-2">
-              <img src={typeof imageFile === 'object' && imageFile.main? imageFile.url :imageFile[0].secure_url } alt="Project Image" className="w-20 h-20 object-cover" />
+              <img src={typeof imageFile === 'object' && imageFile.main
+                    ? imageFile.url
+                    : (Array.isArray(imageFile) && imageFile[0] && imageFile[0].secure_url) || null} alt="Project Image" className="w-20 h-20 object-cover" />
               <button
                 type="button"
                 onClick={handleRemoveMainImage}
