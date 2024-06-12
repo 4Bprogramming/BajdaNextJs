@@ -148,7 +148,7 @@ const EditProjectForm = () => {
       //};
   
     if (!project) {
-      return <div>Loading...</div>;
+      return <div>SKELETON DE EDIT</div>;
     }
   
 
