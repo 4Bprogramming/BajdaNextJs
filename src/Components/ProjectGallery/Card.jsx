@@ -62,11 +62,11 @@ function Card() {
             <footer className="flex place-content-evenly w-full ">
               <div className="w-full bg-custom-green text-black text-center">
                 <h4 className=" text-[20px]">Area</h4>
-                <p className="capitalize">{project.area}</p>
+                <p>{project.area}m<sup>2</sup></p>
               </div>
               <div className="w-full bg-custom-green text-black text-center">
                 <h4 className=" text-[20px]">Año</h4>
-                <p className="capitalize">{project.year}</p>
+                <p>{project.year}</p>
               </div>
               <div className="w-full bg-custom-green text-black text-center">
                 <h4 className=" text-[20px]">Ubicación</h4>
