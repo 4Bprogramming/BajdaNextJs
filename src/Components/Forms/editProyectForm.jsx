@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { FaTrash, FaPlus } from 'react-icons/fa';
-import { deleteImage, getImageCloudinaryObject } from '@/Utils/cloudinary-crud';
+import { deleteImageCloudinary, getImageCloudinaryObject } from '@/Utils/cloudinary-crud';
 import { usePathname } from 'next/navigation';
 import { getProjectById, updateProject } from '@/Utils/project-crud';
 
@@ -31,7 +31,7 @@ const EditProjectForm = () => {
   const [imageFile, setImageFile] = useState({});
   const [deleteImageDB, setDeleteImageDB]=useState([])
 
-  
+  console.log('images==>', images);
 
 
   useEffect(() => {
@@ -54,9 +54,7 @@ const EditProjectForm = () => {
     }
   }, [project]);
 
- console.log('formDate', formData);
- console.log('images', images);
- console.log('imageFile', imageFile);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -70,82 +68,127 @@ const EditProjectForm = () => {
   };
 
   const handleImagesChange = async(e) => {
-      // console.log('e cdo agrego imagenes al grupo ==>', e.target.files)
+    
     const files = Array.from(e.target.files);
-    // console.log('las imagenes transformadas en Array', files);
+  
     const newImages= await getImageCloudinaryObject(0,files) ;
+
+    console.log('newImages',newImages);
     
     setImages([...images, ...newImages]);
   };
 
   const handleRemoveImage = (index) => {
-    const deleteToImage=images.filter((_, i) => i === index)
-    if(deleteToImage[0].secure_url){
-      deleteImage(deleteToImage[0].public_id)
-      setImages(images.filter((_, i) => i !== index));
-    }
-    setDeleteImageDB([...deleteImageDB, deleteToImage])
-    setImages(images.filter((_, i) => i !== index));
-  };
+    const deleteToImage=images.filter((_, i) => i === index)[0]
+    const otherImages= images.filter((_, i) => i === index).flat()
+    console.log("deletetoI,age en remove",deleteToImage);
+    if(deleteToImage.main===false){
+      setDeleteImageDB([...deleteImageDB, deleteToImage])
+      return setImages(images.filter((_, i) => i !== index));
 
+    }
+    else{
+      deleteImageCloudinary(deleteToImage.public_id)
+      setImages(otherImages);
+
+    }
+  };
+  
   const handleRemoveMainImage = () => { //Este esta ok
-    
-    if (imageFile.main) {
-      setDeleteImageDB([...deleteImageDB])
+    console.log('imageFile', imageFile)
+    if (imageFile.cloudinaryID) {
+      setDeleteImageDB([...deleteImageDB,imageFile])
       setImageFile('');
     } else {
-      deleteImage(imageFile[0].public_id);
+      deleteImageCloudinary(imageFile[0].public_id);
       setImageFile('');
     }
   };
-
+  
+  console.log('deleteImageDB', deleteImageDB);
     // onSubmit(updatedProject);
- const handleSubmit = async (e) => {
-      e.preventDefault();
-      const id = project.id;
-      let updatedProject = {
-        ...formData,
-        images: [],
-      };
-      const mainImage=[]
-      try {
-        if(imageFile[0]){
-          console.log('imageFile[0]', imageFile[0]);
-          imageFile[0].main=true
-          mainImage.push(imageFile[0])
-        }
-        const otherImages=images.filter(image => image.secure_url) 
-        if (mainImage.length > 0) {
-          updatedProject.images.push(...mainImage);
-        }
-        console.log('otherImage', otherImages);
+//  const handleSubmit = async (e) => {
+//       e.preventDefault();
+//       const id = project.id;
+//       let updatedProject = {
+//         ...formData,
+//         images: [],
+//       };
+//       const mainImage=[]
+//       try {
+//         if(imageFile[0]){
+//           console.log('imageFile[0]', imageFile[0]);
+//           imageFile[0].main=true
+//           mainImage.push(imageFile[0])
+//         }
+//         const otherImages=images.filter(image => image.secure_url) 
+//         if (mainImage.length > 0) {
+//           updatedProject.images.push(...mainImage);
+//         }
+       
         
-        if (otherImages.length > 0) {
-          updatedProject.images.push(...otherImages);
-        }
-        console.log('images al upload', updatedProject.images);
-        const response = await updateProject(updatedProject,id)
-        console.log('respuesta que llego al front==>', mainImage);
+//         if (otherImages.length > 0) {
+//           updatedProject.images.push(...otherImages);
+//         }
+       
+//         const response = await updateProject(updatedProject,id)
+//         if(deleteImageDB.length>0){
+//           const imagesDelete= deleteImageDB.map(imageIdDelete=>imageIdDelete.id)
+//           const imageDeleteCloudinaryAndDb= await deleteImageCloudinary(imagesDelete,id)
+
+//         }
+
+//       } catch (error) {
         
-      } catch (error) {
-        
-        console.log('error', error);
-      }
-      // if (response.ok) {
-      //   // router.push(`/projects/${id}`);
-        
-      // } else {
-      //   console.error('Error updating project');
-      // }
+//         console.log('error', error);
+//       }
+      
+//   }
+console.log('imageFile==>', imageFile);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const id = project.id;
+  let updatedProject = {
+    ...formData,
+    images: [],
+  };
+
+  const mainImage = [];
+
+  try {
+    if (imageFile[0]) {
+      imageFile[0].main = true;
+      mainImage.push(imageFile[0]);
+    }
+ 
+    const otherImages = images.filter(image => image.secure_url);
+
+    if (mainImage.length > 0) {
+
+      updatedProject.images.push(...mainImage);
+    
+    }
+
+    if (otherImages.length > 0) {
+      updatedProject.images.push(...otherImages);
+    }
+
+    const response = await updateProject(updatedProject, id);
+    if(imageFile.secure_url){
+      deleteImageDB.push(imageFile[0])
+    }
+    if (deleteImageDB.length > 0) {
+      console.log('DELETEIMAGE==>', deleteImageDB);
+      const imagesDelete = deleteImageDB.map(imageIdDelete => imageIdDelete.cloudinaryID).flat();
+      console.log('imagesDelete', imagesDelete);
+      await deleteImageCloudinary(imagesDelete, id);
+    }
+
+    // console.log('Project updated successfully', response);
+  } catch (error) {
+    console.error('Error updating project', error);
   }
-    
-        //   method: 'PUT',
-        //   body: formData,
-        // });
-  
-  
-    
-      //};
+};
   
     if (!project) {
       return <div>Loading...</div>;

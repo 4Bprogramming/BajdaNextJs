@@ -25,6 +25,7 @@ export async function PUT(req, { params }) {
   const id = parseInt(params.id);
 
   console.log('Received PUT request for id:', id);
+  
 
   try {
       let bodyText;
@@ -47,8 +48,10 @@ export async function PUT(req, { params }) {
 
             // Manejo de imágenes si están presentes en el body
             if (body.images) {
+              console.log('body.images==>', body.images);
+              const imagesUpdate= body.images.filter(image=>image.secure_url)
                 updateData.images = {
-                    create: body.images.map(image => ({ url: image.secure_url, main:false, cloudinaryID:image.public_id }))
+                    create: imagesUpdate.map(image => ({ url: image.secure_url, main : image.main? image.main:false, cloudinaryID:image.public_id }))
                 };
             }
 
