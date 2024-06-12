@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 import EmblaCarousel from "../Carousel/EmblaCarousel";
 import '../Carousel/embla.css'
 import { getProjectById } from "@/Utils/project-crud";
-import GreenButton from "@/Components/Buttons/GreenButton";
 import EmblaCarouselSkeleton from "../Skeletons/EmblaCarouselSkeleton";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 function Project() {
   const projectId = usePathname().split("/").at(2);
@@ -31,7 +31,7 @@ function Project() {
       {/* carousel */}
       {project?.images?.length > 0 ? 
        <EmblaCarousel slides={project.images} options={OPTIONS} /> : <EmblaCarouselSkeleton/>}
-       <GreenButton href={`/admin/edit/${projectId}` }text="Editar" style="my-3 ml-1 lg:ml-60" />
+       <SecondaryButton href={`/admin/edit/${projectId}` }text="Editar" style="my-3 ml-1 lg:ml-60" />
 
     </section>
   );
