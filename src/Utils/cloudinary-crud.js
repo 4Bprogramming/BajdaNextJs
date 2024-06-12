@@ -24,18 +24,51 @@ export async function getImageCloudinaryObject(file, files = []) {
     console.log("Oops! ", response.statusText);
   }
 }
-export async function deleteImage(publicId, projectId) {
+// export async function deleteImageCloudinary(publicId, projectId) {
+//   try {
+//     const response = await fetch(CLOUDINARY, {
+//       method: "DELETE",
+  
+//       body: JSON.stringify({ publicId, projectId })
+//     });
+    
+//     if (response.result !== 'ok') {
+//       throw new Error(`Failed to delete image: ${response.result}`);
+//     }
+//     return response;
 
-  const response = await fetch(CLOUDINARY, {
-    method: "DELETE",
+//   } catch (error) {
+//     console.error('Failed to delete image', error);
+//     throw error;
+//   }
 
-    body: JSON.stringify({ publicId, projectId })
-  });
 
-  if (response.ok) {
-    console.log("Image deleted successfully");
-    // Actualiza tu estado o realiza cualquier otra acción necesaria
-  } else {
-    console.error("Failed to delete image");
+//   if (response.ok) {
+//     console.log("Image deleted successfully");
+//     // Actualiza tu estado o realiza cualquier otra acción necesaria
+//   } else {
+//     console.error("Failed to delete image");
+//   }
+// }
+export async function deleteImageCloudinary(publicId, projectId) {
+  try {
+    const response = await fetch(CLOUDINARY, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ publicId, projectId })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete image: ${data}`);
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Failed to delete image', error);
+    throw error;
   }
 }
