@@ -7,7 +7,6 @@ import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 function page() {
   return (
     <section className="mb-3">
-      <SecondaryButton href="/" text="Atrás" style="my-3 ml-1 lg:ml-60" />
       <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5 lg:m-auto lg:max-w-5xl lg:my-2">
         <h1 className="text-4xl font-bold">Proyectos</h1>
         <p className=" text-justify pt-3">
@@ -27,6 +26,7 @@ function page() {
         </p>
       </article>
         <Card />
+      <SecondaryButton href="/" text="Atrás" style="my-3 ml-1 lg:ml-64" />
     </section>
   );
 }
