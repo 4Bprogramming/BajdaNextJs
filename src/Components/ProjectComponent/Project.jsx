@@ -22,46 +22,58 @@ function Project() {
 
   return (
     <section>
-      <SecondaryButton href={"/proyectos"} text="Atrás" style="my-3 ml-1 lg:ml-12" />
+      <SecondaryButton
+        href={"/proyectos"}
+        text="Atrás"
+        style="my-3 ml-1 lg:ml-12"
+      />
       <SecondaryButton
         href={`/admin/edit/${projectId}`}
         text="Editar"
         style="my-3 ml-1"
       />
-      <div className="w-full p-8 border-l-[3px] border-l-custom-green ml-4 mt-4 lg:ml-12">
+       <article className="w-full pl-3  lg:pl-12  lg:mt-4">
+
+      <div className="w-full p-8 border-l-[3px] border-l-custom-green">
         <h1 className="text-2xl">{project.title}</h1>
         <p className=" capitalize">{project.place}</p>
       </div>
+       </article>
       {/* carousel */}
       {project?.images?.length > 0 ? (
         <EmblaCarousel slides={project.images} options={OPTIONS} />
       ) : (
         <EmblaCarouselSkeleton />
       )}
-      <div className="w-full p-4 mb-4 border-l-[3px] border-l-custom-green ml-4 mt-4 lg:ml-12">
-        <h2 className="text-xl">Detalles</h2>
-        <p>
-          <span className="font-bold">Ubicación:</span> <span className="capitalize">{project.place}</span>
-        </p>
-        <p>
-          <span className="font-bold">Tipo:</span> <span className="capitalize">{project.type}</span>
-        </p>
-        <p>
-          <span className="font-bold">Área:</span> {project.area}m<sup>2</sup>
-        </p>
-        <p>
-          <span className="font-bold">Habitaciones:</span> {project.rooms}
-        </p>
-        <p>
-          <span className="font-bold">Cant. Baños:</span> {project.bathrooms}
-        </p>
-        <p>
-          <span className="font-bold">Garage:</span> {project.garage}
-        </p>
-        <p>
-          <span className="font-bold">Descripción:</span> {project.description}
-        </p>
-      </div>
+      <article className="w-full pl-3  mb-4 lg:pl-12">
+        <div className="w-full p-4 border-l-[3px] border-l-custom-green">
+          <h2 className="text-xl">Detalles</h2>
+          <p>
+            <span className="font-bold">Ubicación:</span>{" "}
+            <span className="capitalize">{project.place}</span>
+          </p>
+          <p>
+            <span className="font-bold">Tipo:</span>{" "}
+            <span className="capitalize">{project.type}</span>
+          </p>
+          <p>
+            <span className="font-bold">Área:</span> {project.area}m<sup>2</sup>
+          </p>
+          <p>
+            <span className="font-bold">Habitaciones:</span> {project.rooms}
+          </p>
+          <p>
+            <span className="font-bold">Cant. Baños:</span> {project.bathrooms}
+          </p>
+          <p>
+            <span className="font-bold">Garage:</span> {project.garage}
+          </p>
+          <p>
+            <span className="font-bold">Descripción:</span>{" "}
+            {project.description}
+          </p>
+        </div>
+      </article>
     </section>
   );
 }
