@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
-import { extractPublicId } from "./extractPublicId";
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
