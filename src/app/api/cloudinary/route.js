@@ -50,70 +50,6 @@ export async function POST(request) {
   return NextResponse.json(cloudinaryObjectArray);
 }
 
-// export async function DELETE(req) {
-//   try {
-//     const body = await req.text();
-//     const { publicId, projectId } = JSON.parse(body);
-   
-
-//     if (!publicId && !projectId) {
-//       return NextResponse.json(
-//         { error: "Image ID is required" },
-//         { status: 400 }
-//       );
-//     }
-    
-
-//     if (Array.isArray(publicId) && projectId) {
-//       // Si publicId es un array, manejamos cada id individualmente
-//       await Promise.all(
-//         publicId.map(async (id) => {
-//           const response = await cloudinary.uploader.destroy(id);
-//           if (response.result === "not found") {
-//             return NextResponse.json({ message: `Image with ID ${id} not found` }, { status: 400 });
-//           }
-//         })
-//       );
-
-//       // Desconectar las imágenes del proyecto en la base de datos
-//       await prisma.project.update({
-//         where: { id: projectId },
-//         data: {
-//           images: {
-//             disconnect: publicId.map(id => ({ id })),
-//           },
-//         },
-//       });
-
-//       // Eliminar las imágenes de la tabla 'image' en la base de datos
-//       await prisma.image.deleteMany({
-//         where: {
-//           id: {
-//             in: publicId,
-//           },
-//         },
-//       });
-//     } 
-
-//     if (publicId && !projectId) {
-//       const response = await cloudinary.uploader.destroy(publicId);
-      
-//       if (response === "not found") {
-//         return NextResponse.json({ message: "Not found" }, { status: 400 });   
-//       }
-//     }    
-//     return NextResponse.json(
-//       { message: "Image deleted successfully" },
-//       { status: 200 }
-//     );
-//   } catch (error) {
-//     console.error("Error deleting image:", error);
-//     return NextResponse.json(
-//       { error: "Failed to delete image" },
-//       { status: 500 }
-//     );
-//   }
-// }
 export async function DELETE(req) {
   try {
     const body = await req.text();
@@ -133,7 +69,7 @@ export async function DELETE(req) {
         publicId.map(async (id) => {
           const response = await cloudinary.uploader.destroy(id);
           if (response.result !== "ok") {
-            console.log('response==>', response);
+      
             throw new Error(`Failed to delete image with ID ${id}: ${response.result}`);
           }
         })
