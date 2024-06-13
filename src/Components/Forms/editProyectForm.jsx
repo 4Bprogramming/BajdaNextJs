@@ -1,161 +1,142 @@
-
-import { useEffect, useState } from 'react';
-import { FaTrash, FaPlus } from 'react-icons/fa';
-import { deleteImageCloudinary, getImageCloudinaryObject } from '@/Utils/cloudinary-crud';
-import { usePathname } from 'next/navigation';
-import { getProjectById, updateProject } from '@/Utils/project-crud';
+import { useEffect, useState } from "react";
+import { FaTrash, FaPlus } from "react-icons/fa";
+import {
+  deleteImageCloudinary,
+  getImageCloudinaryObject
+} from "@/Utils/cloudinary-crud";
+import { usePathname } from "next/navigation";
+import { getProjectById, updateProject } from "@/Utils/project-crud";
 
 const EditProjectForm = () => {
   const projectId = usePathname().split("/").at(3);
   const [project, setProject] = useState(null);
-    // Define all possible fields in the initial state to prevent uncontrolled to controlled warning
+
   const initialFormState = {
-    place: '',
-    title: '',
+    place: "",
+    title: "",
     area: 0,
     bathrooms: 0,
-    description: '',
+    description: "",
     garage: 0,
-    image: '',
+    image: "",
     images: [],
     rooms: 0,
-    type: '',
-    year: 0,
+    type: "",
+    year: 0
   };
- // Verifica que project esté definido, si no, inicializa con un objeto vacío
- const safeProject = project || {};
- // Inicializa las imágenes con un array vacío si no están definidas
- const projectImages = safeProject.images || [];
- const [formData, setFormData] = useState(initialFormState);
+
+  const [formData, setFormData] = useState(initialFormState);
   const [images, setImages] = useState([]);
   const [imageFile, setImageFile] = useState({});
-  const [deleteImageDB, setDeleteImageDB]=useState([])
-
-
-
+  const [deleteImageDB, setDeleteImageDB] = useState([]);
 
   useEffect(() => {
     // Simula la obtención de datos del proyecto
-    async function  getProject(projectId){
-      const response = await getProjectById(projectId)
-      setProject(response)
+    async function getProject(projectId) {
+      const response = await getProjectById(projectId);
+      setProject(response);
     }
-    getProject(projectId)
+    getProject(projectId);
   }, [projectId]);
 
   /* usar dos useEffect separados permite manejar de manera clara y efectiva la obtención de datos y la sincronización del estado del formulario, mejorando la claridad y la mantenibilidad del código.*/
   useEffect(() => {
     if (project) {
-      setFormData({ ...project })
-      const mainImages = project.images.filter(image => image.main === true);
-      const nonMainImages = project.images.filter(image => image.main === false);;
-      setImageFile(mainImages[0])
-      setImages(nonMainImages)
+      setFormData({ ...project });
+      const mainImages = project.images.filter((image) => image.main === true);
+      const nonMainImages = project.images.filter(
+        (image) => image.main === false
+      );
+      setImageFile(mainImages[0]);
+      setImages(nonMainImages);
     }
   }, [project]);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageChange = async (e) => { //esta ok
-    ('target==>', e.target.files[0]);
+  const handleImageChange = async (e) => {
     const imageURLs = await getImageCloudinaryObject(e.target.files[0]);
-    ('imageURL', imageURLs);
     setImageFile(imageURLs);
   };
 
-  const handleImagesChange = async(e) => {
-    
+  const handleImagesChange = async (e) => {
     const files = Array.from(e.target.files);
-  
-    const newImages= await getImageCloudinaryObject(0,files) ;
-
-    ('newImages',newImages);
-    
+    const newImages = await getImageCloudinaryObject(0, files);
     setImages([...images, ...newImages]);
   };
 
   const handleRemoveImage = (index) => {
-    const deleteToImage=images.filter((_, i) => i === index)[0]
-    const otherImages= images.filter((_, i) => i === index).flat()
-    ("deletetoI,age en remove",deleteToImage);
-    if(deleteToImage.main===false){
-      setDeleteImageDB([...deleteImageDB, deleteToImage])
+    const deleteToImage = images.filter((_, i) => i === index)[0];
+    const otherImages = images.filter((_, i) => i === index).flat();
+    if (deleteToImage.main === false) {
+      setDeleteImageDB([...deleteImageDB, deleteToImage]);
       return setImages(images.filter((_, i) => i !== index));
-
-    }
-    else{
-      deleteImageCloudinary(deleteToImage.public_id)
+    } else {
+      deleteImageCloudinary(deleteToImage.public_id);
       setImages(otherImages);
-
     }
   };
-  
-  const handleRemoveMainImage = () => { //Este esta ok
-    ('imageFile', imageFile)
+
+  const handleRemoveMainImage = () => {
     if (imageFile.cloudinaryID) {
-      setDeleteImageDB([...deleteImageDB,imageFile])
-      setImageFile('');
+      setDeleteImageDB([...deleteImageDB, imageFile]);
+      setImageFile("");
     } else {
       deleteImageCloudinary(imageFile[0].public_id);
-      setImageFile('');
+      setImageFile("");
     }
   };
-  
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const id = project.id;
-  let updatedProject = {
-    ...formData,
-    images: [],
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const id = project.id;
+    let updatedProject = {
+      ...formData,
+      images: []
+    };
+
+    const mainImage = [];
+
+    try {
+      if (imageFile[0]) {
+        imageFile[0].main = true;
+        mainImage.push(imageFile[0]);
+      }
+
+      const otherImages = images.filter((image) => image.secure_url);
+
+      if (mainImage.length > 0) {
+        updatedProject.images.push(...mainImage);
+      }
+
+      if (otherImages.length > 0) {
+        updatedProject.images.push(...otherImages);
+      }
+
+      const response = await updateProject(updatedProject, id);
+      if (imageFile.secure_url) {
+        deleteImageDB.push(imageFile[0]);
+      }
+      if (deleteImageDB.length > 0) {
+        const cloudinaryImageIds = deleteImageDB
+          .map((imageIdDelete) => imageIdDelete.cloudinaryID)
+          .flat();
+        await deleteImageCloudinary(cloudinaryImageIds, id);
+      }
+
+      // ('Project updated successfully', response);
+    } catch (error) {
+      console.error("Error updating project", error);
+    }
   };
 
-  const mainImage = [];
-
-  try {
-    if (imageFile[0]) {
-      imageFile[0].main = true;
-      mainImage.push(imageFile[0]);
-    }
- 
-    const otherImages = images.filter(image => image.secure_url);
-
-    if (mainImage.length > 0) {
-
-      updatedProject.images.push(...mainImage);
-    
-    }
-
-    if (otherImages.length > 0) {
-      updatedProject.images.push(...otherImages);
-    }
-
-    const response = await updateProject(updatedProject, id);
-    if(imageFile.secure_url){
-      deleteImageDB.push(imageFile[0])
-    }
-    if (deleteImageDB.length > 0) {
-      ('DELETEIMAGE==>', deleteImageDB);
-      const imagesDelete = deleteImageDB.map(imageIdDelete => imageIdDelete.cloudinaryID).flat();
-      ('imagesDelete', imagesDelete);
-      await deleteImageCloudinary(imagesDelete, id);
-    }
-
-    // ('Project updated successfully', response);
-  } catch (error) {
-    console.error('Error updating project', error);
+  if (!project) {
+    return <div>SKELETON DE EDIT</div>;
   }
-};
-  
-    if (!project) {
-      return <div>SKELETON DE EDIT</div>;
-    }
-  
 
- 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Form fields */}
@@ -190,7 +171,9 @@ const handleSubmit = async (e) => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Bathrooms</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Bathrooms
+        </label>
         <input
           type="number"
           name="bathrooms"
@@ -200,7 +183,9 @@ const handleSubmit = async (e) => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Description</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Description
+        </label>
         <textarea
           name="description"
           value={formData.description}
@@ -209,7 +194,9 @@ const handleSubmit = async (e) => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Garage</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Garage
+        </label>
         <input
           type="number"
           name="garage"
@@ -219,13 +206,24 @@ const handleSubmit = async (e) => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Main Image</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Main Image
+        </label>
         <div className="mt-2 flex items-center">
           {imageFile ? (
             <div className="relative m-2">
-              <img src={typeof imageFile === 'object' && imageFile.main
+              <img
+                src={
+                  typeof imageFile === "object" && imageFile.main
                     ? imageFile.url
-                    : (Array.isArray(imageFile) && imageFile[0] && imageFile[0].secure_url) || null} alt="Project Image" className="w-20 h-20 object-cover" />
+                    : (Array.isArray(imageFile) &&
+                        imageFile[0] &&
+                        imageFile[0].secure_url) ||
+                      null
+                }
+                alt="Project Image"
+                className="w-20 h-20 object-cover"
+              />
               <button
                 type="button"
                 onClick={handleRemoveMainImage}
@@ -246,7 +244,9 @@ const handleSubmit = async (e) => {
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Images</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Images
+        </label>
         <div className="mt-2 flex items-center">
           <label className="cursor-pointer">
             <FaPlus className="text-blue-500" size={24} />
@@ -262,9 +262,15 @@ const handleSubmit = async (e) => {
         <div className="mt-2 flex flex-wrap">
           {images.map((image, index) => (
             <div key={index} className="relative m-2">
-                  <img  src={typeof image === 'object' && image.secure_url? image.secure_url : image.url}
+              <img
+                src={
+                  typeof image === "object" && image.secure_url
+                    ? image.secure_url
+                    : image.url
+                }
                 alt={`Imagen del proyecto`}
-                className="w-20 h-20 object-cover" />
+                className="w-20 h-20 object-cover"
+              />
               <button
                 type="button"
                 onClick={() => handleRemoveImage(index)}
@@ -306,7 +312,12 @@ const handleSubmit = async (e) => {
           className="mt-1 block w-full"
         />
       </div>
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Update Project</button>
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        Update Project
+      </button>
     </form>
   );
 };
