@@ -50,6 +50,8 @@ const CreateProjectForm = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
+      setProjectCreated(false);
+      setProjectNotCreated(false);
       setLoader(true);
       const imageCloudinaryObject = await getImageCloudinaryObject(file, files);
       const updatedFormData = { ...formData };
