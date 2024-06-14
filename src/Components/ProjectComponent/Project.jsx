@@ -68,7 +68,7 @@ function Project() {
           <p>
             <span className="font-bold">Garage:</span> {project.garage}
           </p>
-          <p>
+          <p className=" max-w-[700px] text-justify">
             <span className="font-bold">Descripción:</span>{" "}
             {project.description}
           </p>
