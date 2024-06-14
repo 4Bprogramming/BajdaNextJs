@@ -48,24 +48,24 @@ function Project() {
       <article className="w-full pl-3  mb-4 lg:pl-12">
         <div className="w-full p-4 border-l-[3px] border-l-custom-green">
           <h2 className="text-xl">Detalles</h2>
-          <p>
+          <p className="mb-2 md:mb-1">
             <span className="font-bold">Ubicación:</span>{" "}
             <span className="capitalize">{project.place}</span>
           </p>
-          <p>
+          <p className="mb-2 md:mb-1">
             <span className="font-bold">Tipo:</span>{" "}
             <span className="capitalize">{project.type}</span>
           </p>
-          <p>
+          <p className="mb-2 md:mb-1">
             <span className="font-bold">Área:</span> {project.area}m<sup>2</sup>
           </p>
-          <p>
+          <p className="mb-2 md:mb-1">
             <span className="font-bold">Habitaciones:</span> {project.rooms}
           </p>
-          <p>
+          <p className="mb-2 md:mb-1">
             <span className="font-bold">Cant. Baños:</span> {project.bathrooms}
           </p>
-          <p>
+          <p className="mb-2 md:mb-1">
             <span className="font-bold">Garage:</span> {project.garage}
           </p>
           <p className=" max-w-[700px] text-justify">
