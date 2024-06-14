@@ -6,6 +6,7 @@ import {
 } from "@/Utils/cloudinary-crud";
 import { usePathname } from "next/navigation";
 import { getProjectById, updateProject } from "@/Utils/project-crud";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 const EditProjectForm = () => {
   const projectId = usePathname().split("/").at(3);
