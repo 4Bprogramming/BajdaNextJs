@@ -29,6 +29,9 @@ const EditProjectForm = () => {
   const [images, setImages] = useState([]);
   const [imageFile, setImageFile] = useState({});
   const [deleteImageDB, setDeleteImageDB] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [projectEdited, setProjectEdited] = useState(false);
+  const [projectNotEdited, setProjectNotEdited] = useState(false);
 
   useEffect(() => {
     // Simula la obtención de datos del proyecto
@@ -99,8 +102,11 @@ const EditProjectForm = () => {
     };
 
     const mainImage = [];
-
+    setProjectEdited(false);
+    setProjectNotEdited(false);
+    
     try {
+      setLoader(true);
       if (imageFile[0]) {
         imageFile[0].main = true;
         mainImage.push(imageFile[0]);
@@ -115,8 +121,16 @@ const EditProjectForm = () => {
       if (otherImages.length > 0) {
         updatedProject.images.push(...otherImages);
       }
-
       const response = await updateProject(updatedProject, id);
+      if (response) {
+        setProjectEdited(true);
+        setLoader(false);
+        setFormData(formDataInitialValue);
+      } else {
+        setLoader(false);
+        setProjectNotEdited(true);
+      }
+      
       if (imageFile.secure_url) {
         deleteImageDB.push(imageFile[0]);
       }
@@ -323,8 +337,25 @@ const EditProjectForm = () => {
         type="submit"
         className="bg-custom-green text-white px-4 py-2 rounded w-fit m-auto outline hover:outline-2 hover:outline-custom-green hover:bg-transparent hover:text-custom-green transition-all duration-700 "
         >
-       Actualizar proyecto
+       {!loader ? "Editar Proyecto" : "Editando..."}
       </button>
+      {projectEdited && (
+          <article className="flex flex-col items-center w-full">
+            <p className="text-xl mt-2 py-2 text-custom-green text-center">
+              Genial, tu protecto se ha editado con Exito!
+            </p>
+            <SecondaryButton href="/proyectos" text="Ir a Galeria" style="" />
+          </article>
+        )}
+
+        {projectNotEdited && (
+          <article className="flex flex-col items-center w-full">
+          <p className="text-xl mt-2 py-2 text-red-600 text-center">
+            Hubo un problema al editar el Proyecto!
+          </p>
+          <SecondaryButton href="/" text="Ir a home" style="" />
+          </article>
+        )}
     </form>
     </>
   );
