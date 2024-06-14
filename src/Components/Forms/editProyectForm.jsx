@@ -138,144 +138,139 @@ const EditProjectForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <>
+     <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
+        Edita el proyecto
+      </h1>
+    <form onSubmit={handleSubmit} className="w-full flex flex-col justify-around m-auto border-4 h-fit p-2 border-custom-green border-t-transparent sm:w-3/4 lg:w-1/2 lg:mb-6">
       {/* Form fields */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">Place</label>
-        <input
-          type="text"
-          name="place"
-          value={formData.place}
-          onChange={handleChange}
-          className="mt-1 block w-full"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Title</label>
+        <label className="block text-xl font-medium text-custom-green ">Título</label>
         <input
           type="text"
           name="title"
           value={formData.title}
           onChange={handleChange}
-          className="mt-1 block w-full"
-        />
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
+          />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Area</label>
+        <label className="block text-xl font-medium text-custom-green">Ubicación</label>
+        <input
+          type="text"
+          name="place"
+          value={formData.place}
+          onChange={handleChange}
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
+          />
+      </div>
+
+      <div>
+        <label className="block text-xl font-medium text-custom-green">Cant. mts<sup>2</sup></label>
         <input
           type="number"
           name="area"
           value={formData.area}
           onChange={handleChange}
-          className="mt-1 block w-full"
-        />
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
+          />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Bathrooms
+        <label className="block text-xl font-medium text-custom-green">
+          Cant. De Baños
         </label>
         <input
           type="number"
           name="bathrooms"
           value={formData.bathrooms}
           onChange={handleChange}
-          className="mt-1 block w-full"
-        />
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12 "
+          />
       </div>
+
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Description
-        </label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          className="mt-1 block w-full"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Garage
+        <label className="block text-xl font-medium text-custom-green">
+          Cant. de Garages
         </label>
         <input
           type="number"
           name="garage"
           value={formData.garage}
           onChange={handleChange}
-          className="mt-1 block w-full"
-        />
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
+          />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Main Image
+        <label className="block text-xl font-medium text-custom-green my-2">
+          Imagen Principal
         </label>
-        <div className="mt-2 flex items-center">
+        <div className=" flex ">
           {imageFile ? (
-            <div className="relative m-2">
+            <div className="relative">
               <img
                 src={
                   typeof imageFile === "object" && imageFile.main
-                    ? imageFile.url
-                    : (Array.isArray(imageFile) &&
-                        imageFile[0] &&
-                        imageFile[0].secure_url) ||
-                      null
+                  ? imageFile.url
+                  : (Array.isArray(imageFile) &&
+                  imageFile[0] &&
+                  imageFile[0].secure_url) ||
+                  null
                 }
                 alt="Project Image"
-                className="w-20 h-20 object-cover"
-              />
+                className="object-cover h-36 w-full md:h-52"
+                />
               <button
                 type="button"
                 onClick={handleRemoveMainImage}
-                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
-              >
+                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
+                >
                 <FaTrash />
               </button>
             </div>
           ) : (
             <input
-              type="file"
-              accept="image/*"
-              name="image"
-              placeholder="Portada"
-              onChange={handleImageChange}
+            type="file"
+            accept="image/*"
+            name="image"
+            placeholder="Portada"
+            onChange={handleImageChange}
             />
           )}
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Images
+        <label className="block text-xl font-medium text-custom-green mt-8 mb-2">
+          Imagenes 
         </label>
         <div className="mt-2 flex items-center">
           <label className="cursor-pointer">
-            <FaPlus className="text-blue-500" size={24} />
+            <FaPlus className="text-blue-500 mb-2 hover:text-custom-green" size={30} />
             <input
               type="file"
               multiple
               name="images"
               onChange={handleImagesChange}
               className="hidden"
-            />
+              />
           </label>
         </div>
-        <div className="mt-2 flex flex-wrap">
+        <div className=" grid grid-cols-2 gap-1 row md:grid-cols-3">
           {images.map((image, index) => (
-            <div key={index} className="relative m-2">
+            <div key={index} className="relative">
               <img
                 src={
                   typeof image === "object" && image.secure_url
-                    ? image.secure_url
-                    : image.url
+                  ? image.secure_url
+                  : image.url
                 }
                 alt={`Imagen del proyecto`}
-                className="w-20 h-20 object-cover"
-              />
+                className="object-cover h-36 w-full md:h-48"
+                />
               <button
                 type="button"
                 onClick={() => handleRemoveImage(index)}
-                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
-              >
+                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 cursor-pointer"
+                >
                 <FaTrash />
               </button>
             </div>
@@ -283,42 +278,55 @@ const EditProjectForm = () => {
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Rooms</label>
+        <label className="block text-xl font-medium text-custom-green mt-4">Cant. de Habitaciones</label>
         <input
           type="number"
           name="rooms"
           value={formData.rooms}
           onChange={handleChange}
-          className="mt-1 block w-full"
-        />
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
+          />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Type</label>
+        <label className="block text-xl font-medium text-custom-green">Tipo de Vivienda</label>
         <input
           type="text"
           name="type"
           value={formData.type}
           onChange={handleChange}
-          className="mt-1 block w-full"
-        />
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
+          />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Year</label>
+        <label className="block text-xl font-medium text-custom-green">Año de Construcción</label>
         <input
           type="number"
           name="year"
           value={formData.year}
           onChange={handleChange}
-          className="mt-1 block w-full"
-        />
+          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
+          />
+      </div>
+      <div>
+        <label className="block text-xl font-medium text-custom-green">
+          Descripción
+        </label>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          className="mt-2 p-2 w-full border rounded-md  min-h-[150px] resize-none 
+          focus:outline-custom-green"
+          />
       </div>
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Update Project
+        className="bg-custom-green text-white px-4 py-2 rounded w-fit m-auto outline hover:outline-2 hover:outline-custom-green hover:bg-transparent hover:text-custom-green transition-all duration-700 "
+        >
+       Actualizar proyecto
       </button>
     </form>
+    </>
   );
 };
 
