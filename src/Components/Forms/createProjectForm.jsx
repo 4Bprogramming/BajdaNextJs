@@ -11,7 +11,7 @@ const CreateProjectForm = () => {
   const [files, setFiles] = useState([]);
   const [loader, setLoader] = useState(false);
   const [projectCreated, setProjectCreated] = useState(false);
-  const [projectNotCreated, setProjectNotCreated] = useState(true);
+  const [projectNotCreated, setProjectNotCreated] = useState(false);
   const [formData, setFormData] = useState({
     place: "",
     title: "",
