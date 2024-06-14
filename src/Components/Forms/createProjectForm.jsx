@@ -81,7 +81,7 @@ const CreateProjectForm = () => {
         Crea el Proyecto
       </h1>
       <form
-        className=" w-full flex flex-col justify-around m-auto border-4 h-fit p-2 border-custom-green border-t-transparent sm:w-3/4 lg:w-1/2 lg:mb-6"
+        className=" w-full flex flex-col justify-around m-auto border-4 h-fit p-2 border-custom-green sm:w-3/4 lg:w-1/2 lg:mb-6"
         onSubmit={handleSubmit}
       >
         <input
