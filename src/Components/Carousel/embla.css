@@ -1,128 +1,168 @@
 .embla {
-    position:relative;
-    max-width: 45rem;
-    margin: auto;
-    --slide-height: 19rem;
-    --slide-spacing: 1rem;
-    --slide-size: 90%;
-    margin-top: 30px;
-    margin-bottom: 1rem;
-  }
-  .embla__viewport {
-    overflow: hidden;
-  }
-  .embla__container {
-    backface-visibility: hidden;
-    display: flex;
-    touch-action: pan-y pinch-zoom;
-   
-  }
-  .embla__slide {
-    position: relative;
-    cursor:grabbing;
-    flex: 0 0 var(--slide-size);
-    min-width: 0;
-    padding-left: var(--slide-spacing);
-    border: 1px solid #a59a9a;
-    margin: 5px;
-    height: 250px;
-    max-width: 300px;
-    overflow: hidden;
-  }
-  .embla__slide__number {
-    box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
-    border-radius: 1.8rem;
-    font-size: 4rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--slide-height);
-  }
-  .embla__controls {
-    
-  }
-  .embla__buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: fit-content;
-    position: absolute;
-    top: -46px;
-    right: 0;
-    
-  }
-  .embla__button {
-    -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: transparent;
-    touch-action: manipulation;
-    display: inline-flex;
-    text-decoration: none;
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
-    width: 3.6rem;
-    height: 3.6rem;
-    z-index: 1;
-    border-radius: 50%;
-    color: var(--text-body);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .embla__button:disabled {
-    color: var(--detail-high-contrast);
-  }
-  .embla__button__svg {
-    width: 35%;
-    height: 35%;
-  }
-  .embla__dots {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    
-    
-  }
-  .embla__dot {
-    -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #2eca6a;
-    touch-action: manipulation;
-    display: inline-flex;
-    text-decoration: none;
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    width: 1rem;
-    height: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin:0 1px;
-  }
- 
-  .embla__dot:after {
-    box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
-    background-color: white;
-    width: .7rem;
-    height: .7rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    content: '';
-  }
+  position: relative;
+  max-width: 45rem;
+  margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 1rem;
+  --slide-size: 90%;
+  margin-top: 30px;
+  margin-bottom: 1rem;
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+.embla__slide {
+  position: relative;
+  cursor: grabbing;
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  border: 1px solid #a59a9a;
+  margin: 5px;
+  height: 250px;
+  max-width: 300px;
+  overflow: hidden;
+}
+.embla__slide__number {
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  border-radius: 1.8rem;
+  font-size: 4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--slide-height);
+}
+.embla__controls {
+}
+.embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+  position: absolute;
+  top: -46px;
+  right: 0;
+}
+.embla__button {
+  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  width: 3.6rem;
+  height: 3.6rem;
+  z-index: 1;
+  border-radius: 50%;
+  color: var(--text-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.embla__button:disabled {
+  color: var(--detail-high-contrast);
+}
+.embla__button__svg {
+  width: 35%;
+  height: 35%;
+}
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.embla__dot {
+  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #2eca6a;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 0 1px;
+}
 
-  .embla__dot--selected:after {
-    box-shadow: inset 0 0 0 0.2rem var(--text-body);
-    background-color: #1e7c47; 
+.embla__dot:after {
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  background-color: white;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  content: "";
+}
+
+.embla__dot--selected:after {
+  box-shadow: inset 0 0 0 0.2rem var(--text-body);
+  background-color: #1e7c47;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #9e9e9ec2; 
+  background: linear-gradient(to top left, #2eca6ad4, #ffffffd1);
+  z-index: 9;
+}
+#enlargedImageContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 450px;
+  z-index: 10;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+#enlargedImageContainer::after {
+  content: '';
+  position: absolute;
+  top: 10px; 
+  right: 20px;
+  width: 50px; 
+  height: 50px;
+  background-image: url('/resources/logo.png'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#enlargedImageContainer.show {
+  opacity: 1;
+  visibility: visible;
+}
+/*Queries*/
+@media only screen and (min-width: 1024px) {
+  .embla__slide {
+    height: 350px;
+    max-width: 450px;
   }
-  
+}
