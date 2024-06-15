@@ -6,6 +6,7 @@ import "../Carousel/embla.css";
 import { getProjectById } from "@/Utils/project-crud";
 import EmblaCarouselSkeleton from "../Skeletons/EmblaCarouselSkeleton";
 import SecondaryButton from "../Buttons/SecondaryButton";
+import DeleteButton from "../Buttons/DeleteButton";
 
 function Project() {
   const projectId = usePathname().split("/").at(2);
@@ -22,23 +23,33 @@ function Project() {
 
   return (
     <section>
-      <SecondaryButton
-        href={"/proyectos"}
-        text="Atrás"
-        style="my-3 ml-1 lg:ml-12"
-      />
-      <SecondaryButton
-        href={`/admin/edit/${projectId}`}
-        text="Editar"
-        style="my-3 ml-1"
-      />
-       <article className="w-full pl-3  lg:pl-12  lg:mt-4">
-
-      <div className="w-full p-8 border-l-[3px] border-l-custom-green">
-        <h1 className="text-2xl">{project.title}</h1>
-        <p className=" capitalize">{project.place}</p>
-      </div>
-       </article>
+      <article className="flex my-4 w-[90%] m-auto">
+        <div className="flex w-full gap-3">
+          <SecondaryButton
+            href={"/proyectos"}
+            text="Atrás"
+          
+          />
+          <SecondaryButton
+            href={`/admin/edit/${projectId}`}
+            text="Editar"
+          
+          />
+        </div>
+        <div className="flex w-full justify-end">
+          <DeleteButton
+            href={`/admin/edit/${projectId}`}
+            text="Eliminar"
+       
+          />
+        </div>
+      </article>
+      <article className="w-full pl-3  lg:pl-12  lg:mt-4">
+        <div className="w-full p-8 border-l-[3px] border-l-custom-green">
+          <h1 className="text-2xl">{project.title}</h1>
+          <p className=" capitalize">{project.place}</p>
+        </div>
+      </article>
       {/* carousel */}
       {project?.images?.length > 0 ? (
         <EmblaCarousel slides={project.images} options={OPTIONS} />
