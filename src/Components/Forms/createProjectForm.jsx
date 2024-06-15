@@ -1,14 +1,12 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { createProject } from "@/Utils/project-crud";
 import React, { useState } from "react";
-import { getImageCloudinaryObject } from "@/Utils/cloudinary-crud";
 import SecondaryButton from "../Buttons/SecondaryButton";
+import FormImages from "./formImages";
 
 const CreateProjectForm = () => {
-  const router = useRouter();
-  const [file, setFile] = useState(null);
-  const [files, setFiles] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imageFile, setImageFile] = useState({});
   const [loader, setLoader] = useState(false);
   const [projectCreated, setProjectCreated] = useState(false);
   const [projectNotCreated, setProjectNotCreated] = useState(false);
@@ -49,23 +47,36 @@ const CreateProjectForm = () => {
   // Manejador del envío del formulario
   async function handleSubmit(e) {
     e.preventDefault();
+    const mainImage = [];
     try {
       setProjectCreated(false);
       setProjectNotCreated(false);
       setLoader(true);
-      const imageCloudinaryObject = await getImageCloudinaryObject(file, files);
-      const updatedFormData = { ...formData };
-
-      if (imageCloudinaryObject) {
-        updatedFormData.images = imageCloudinaryObject;
-        setFormData(updatedFormData);
+      
+      const updatedFormData = { ...formData, images:[] };
+      if (imageFile[0]) {
+        imageFile[0].main = true;
+        mainImage.push(imageFile[0]);
       }
+
+      const otherImages = images.filter((image) => image.secure_url);
+
+      if (mainImage.length > 0) {
+        updatedFormData.images.push(...mainImage);
+      }
+
+      if (otherImages.length > 0) {
+        updatedFormData.images.push(...otherImages);
+      }
+     
       const response = await createProject(JSON.stringify(updatedFormData));
 
       if (response) {
         setProjectCreated(true);
         setLoader(false);
         setFormData(formDataInitialValue);
+        setImageFile({})
+        setImages([])
       } else {
         setLoader(false);
         setProjectNotCreated(true);
@@ -111,31 +122,7 @@ const CreateProjectForm = () => {
           className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
           required
         />
-        <label htmlFor="image" className="block text-gray-700 mt-2">
-          Sube imagen principal
-        </label>
-        <input
-          type="file"
-          accept="image/*"
-          name="image"
-          placeholder="Portada"
-          onChange={(e) => setFile(e.target.files[0])}
-          className="border rounded  focus:outline-custom-green pt-3 pl-1 h-14 mt-1"
-          required
-        />
-        <label htmlFor="images" className="block text-gray-700 mt-2">
-          Sube imagenes
-        </label>
-        <input
-          type="file"
-          name="images"
-          accept="image/*"
-          placeholder="Imagenes"
-          multiple
-          onChange={(e) => setFiles([...e.target.files])}
-          className="border rounded  focus:outline-custom-green pt-3 pl-1 h-14 mt-1"
-          required
-        />
+        <FormImages images={images} imageFile={imageFile} setImages={setImages} setImageFile={setImageFile} />
         <input
           type="number"
           name="rooms"
