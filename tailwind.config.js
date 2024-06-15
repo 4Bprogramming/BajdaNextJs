@@ -19,6 +19,7 @@ module.exports = {
         'custom-green': '#2eca6a',
         'grey-1':'#555',
         'grey-2':'#adadad',
+        'grey-body':'#faf8f8',
         'form-grey-border':'#ced4da',
         'form-input-color':'#495057',
         'custom-contact':'#faf8f8'
