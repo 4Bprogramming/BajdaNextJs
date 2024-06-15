@@ -18,7 +18,7 @@ function Main() {
             />
           </div>
           <article class="absolute top-2 left-2 sm:top-9 md:top-20 lg:top-32 lg:left-6 xl:top-44">
-            <p class="text-white md:text-4xl lg:text-5xl">Arquitectos</p>
+            <p class="text-white md:text-4xl lg:text-5xl">Arquitecto</p>
             <h1 class="text-white max-320:text-3xl text-4xl md:text-7xl lg:text-8xl ">
               <span class="text-custom-green max-320:text-3xl text-5xl md:text-7xl lg:text-9xl">
                 Arq.
@@ -26,7 +26,7 @@ function Main() {
               Martín Bajda
             </h1>
             <p class="text-white md:text-4xl lg:text-4xl">
-              Estudio De Arquitectura
+              Estudio de Arquitectura
             </p>
           </article>
         </section>
