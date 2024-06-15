@@ -13,12 +13,9 @@ model Project {
   place   String   
   title   String
   area    Int
-  bathrooms Int
   description String @db.Text
-  garage   Int
   images   Image[]
   rooms    Int
-  type     String
   year     Int
   
 }

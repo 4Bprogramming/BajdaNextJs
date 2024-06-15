@@ -37,11 +37,8 @@ export async function POST(request) {
           create: imageObjects
         },
         area: +body.area,
-        bathrooms: +body.bathrooms,
         description: body.description,
-        garage: +body.garage,
         rooms: +body.rooms,
-        type: body.type,
         year: +body.year
       },
       include: {

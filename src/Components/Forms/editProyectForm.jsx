@@ -157,7 +157,7 @@ const EditProjectForm = () => {
      <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Edita el proyecto
       </h1>
-    <form onSubmit={handleSubmit} className="w-full flex flex-col justify-around m-auto border-4 h-fit p-2 border-custom-green border-t-transparent sm:w-3/4 lg:w-1/2 lg:mb-6">
+    <form onSubmit={handleSubmit} className="w-full flex flex-col justify-around m-auto border-4 h-fit p-2 border-custom-green sm:w-3/4 lg:w-1/2 lg:mb-6">
       {/* Form fields */}
       <div>
         <label className="block text-xl font-medium text-custom-green ">Título</label>
@@ -186,31 +186,6 @@ const EditProjectForm = () => {
           type="number"
           name="area"
           value={formData.area}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
-          />
-      </div>
-      <div>
-        <label className="block text-xl font-medium text-custom-green">
-          Cant. De Baños
-        </label>
-        <input
-          type="number"
-          name="bathrooms"
-          value={formData.bathrooms}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12 "
-          />
-      </div>
-
-      <div>
-        <label className="block text-xl font-medium text-custom-green">
-          Cant. de Garages
-        </label>
-        <input
-          type="number"
-          name="garage"
-          value={formData.garage}
           onChange={handleChange}
           className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
           />
@@ -300,16 +275,6 @@ const EditProjectForm = () => {
           value={formData.rooms}
           onChange={handleChange}
           className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
-          />
-      </div>
-      <div>
-        <label className="block text-xl font-medium text-custom-green">Tipo de Vivienda</label>
-        <input
-          type="text"
-          name="type"
-          value={formData.type}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
           />
       </div>
       <div>

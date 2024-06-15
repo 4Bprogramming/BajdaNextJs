@@ -53,20 +53,10 @@ function Project() {
             <span className="capitalize">{project.place}</span>
           </p>
           <p className="mb-2 md:mb-1">
-            <span className="font-bold">Tipo:</span>{" "}
-            <span className="capitalize">{project.type}</span>
-          </p>
-          <p className="mb-2 md:mb-1">
             <span className="font-bold">Área:</span> {project.area}m<sup>2</sup>
           </p>
           <p className="mb-2 md:mb-1">
             <span className="font-bold">Habitaciones:</span> {project.rooms}
-          </p>
-          <p className="mb-2 md:mb-1">
-            <span className="font-bold">Cant. Baños:</span> {project.bathrooms}
-          </p>
-          <p className="mb-2 md:mb-1">
-            <span className="font-bold">Garage:</span> {project.garage}
           </p>
           <p className=" max-w-[700px] text-justify">
             <span className="font-bold">Descripción:</span>{" "}

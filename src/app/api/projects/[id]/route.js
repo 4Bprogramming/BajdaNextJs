@@ -36,12 +36,8 @@ export async function PUT(req, { params }) {
       if (body.place !== undefined) updateData.place = body.place;
       if (body.title !== undefined) updateData.title = body.title;
       if (body.area !== undefined) updateData.area = +body.area;
-      if (body.bathrooms !== undefined) updateData.bathrooms = +body.bathrooms;
-      if (body.description !== undefined)
-        updateData.description = body.description;
-      if (body.garage !== undefined) updateData.garage = +body.garage;
+      if (body.description !== undefined)updateData.description = body.description;
       if (body.rooms !== undefined) updateData.rooms = +body.rooms;
-      if (body.type !== undefined) updateData.type = body.type;
       if (body.year !== undefined) updateData.year = +body.year;
 
       // Manejo de imágenes si están presentes en el body

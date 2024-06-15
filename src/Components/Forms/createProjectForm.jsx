@@ -111,25 +111,6 @@ const CreateProjectForm = () => {
           className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
           required
         />
-        <input
-          type="number"
-          name="bathrooms"
-          value={formData.bathrooms}
-          onChange={handleChange}
-          placeholder="Cant. Baños"
-          className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
-          required
-        />
-
-        <input
-          type="number"
-          name="garage"
-          value={formData.garage}
-          onChange={handleChange}
-          placeholder="Cant. garage"
-          className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
-          required
-        />
         <label htmlFor="image" className="block text-gray-700 mt-2">
           Sube imagen principal
         </label>
@@ -161,15 +142,6 @@ const CreateProjectForm = () => {
           value={formData.rooms}
           onChange={handleChange}
           placeholder="Cant. Habitaciones"
-          className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
-          required
-        />
-        <input
-          type="text"
-          name="type"
-          value={formData.type}
-          onChange={handleChange}
-          placeholder="Tipo: Chalet, casa quinta, duplex"
           className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
           required
         />
