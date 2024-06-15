@@ -45,7 +45,7 @@ function Project() {
       ) : (
         <EmblaCarouselSkeleton />
       )}
-      <article className="w-full pl-3  mb-4 lg:pl-12">
+      <article className="w-full pl-3  mb-4 md:max-w-[45rem] md:m-auto md:mb-4 md:pl-0">
         <div className="w-full p-4 border-l-[3px] border-l-custom-green">
           <h2 className="text-xl">Detalles</h2>
           <p className="mb-2 md:mb-1">
