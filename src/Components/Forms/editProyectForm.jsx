@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import {
-  deleteImageCloudinary} from "@/Utils/cloudinary-crud";
+import { deleteImageCloudinary } from "@/Utils/cloudinary-crud";
 import { usePathname } from "next/navigation";
 import { getProjectById, updateProject } from "@/Utils/project-crud";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
+import CubeLoader from "../Loaders/CubeLoader";
 
 const EditProjectForm = () => {
   const projectId = usePathname().split("/").at(3);
@@ -59,7 +59,6 @@ const EditProjectForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const id = project.id;
@@ -71,7 +70,7 @@ const EditProjectForm = () => {
     const mainImage = [];
     setProjectEdited(false);
     setProjectNotEdited(false);
-    
+
     try {
       setLoader(true);
       if (imageFile[0]) {
@@ -93,13 +92,13 @@ const EditProjectForm = () => {
         setProjectEdited(true);
         setLoader(false);
         setFormData(initialFormState);
-        setImageFile({})
-        setImages([])
+        setImageFile({});
+        setImages([]);
       } else {
         setLoader(false);
         setProjectNotEdited(true);
       }
-      
+
       if (imageFile.secure_url) {
         deleteImageDB.push(imageFile[0]);
       }
@@ -116,107 +115,133 @@ const EditProjectForm = () => {
     }
   };
 
-  if (!project) {
-    return <div>SKELETON DE EDIT</div>;
-  }
-
   return (
     <>
-     <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
+      <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Edita el proyecto
       </h1>
-    <form onSubmit={handleSubmit} className="w-full flex flex-col justify-around m-auto border-4 h-fit p-2 border-custom-green sm:w-3/4 lg:w-1/2 lg:mb-6">
-      {/* Form fields */}
-      <div>
-        <label className="block text-xl font-medium text-custom-green ">Título</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
-          />
-      </div>
-      <div>
-        <label className="block text-xl font-medium text-custom-green">Ubicación</label>
-        <input
-          type="text"
-          name="place"
-          value={formData.place}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
-          />
-      </div>
-
-      <div>
-        <label className="block text-xl font-medium text-custom-green">Cant. mts<sup>2</sup></label>
-        <input
-          type="number"
-          name="area"
-          value={formData.area}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
-          />
-      </div>
-     
-        <FormImages images={images} imageFile={imageFile} setImages={setImages} setImageFile={setImageFile} setDeleteImageDB={setDeleteImageDB} deleteImageDB={deleteImageDB} />
-   
-      <div>
-        <label className="block text-xl font-medium text-custom-green mt-4">Cant. de Habitaciones</label>
-        <input
-          type="number"
-          name="rooms"
-          value={formData.rooms}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
-          />
-      </div>
-      <div>
-        <label className="block text-xl font-medium text-custom-green">Año de Construcción</label>
-        <input
-          type="number"
-          name="year"
-          value={formData.year}
-          onChange={handleChange}
-          className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
-          />
-      </div>
-      <div>
-        <label className="block text-xl font-medium text-custom-green">
-          Descripción
-        </label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          className="mt-2 p-2 w-full border rounded-md  min-h-[150px] resize-none 
-          focus:outline-custom-green"
-          />
-      </div>
-      <button
-        type="submit"
-        className="bg-custom-green text-white px-4 py-2 rounded w-fit m-auto outline hover:outline-2 hover:outline-custom-green hover:bg-transparent hover:text-custom-green transition-all duration-700 "
+      {!project ? (
+        <CubeLoader />
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col justify-around m-auto border-4 h-fit p-2 border-custom-green sm:w-3/4 lg:w-1/2 lg:mb-6"
         >
-       {!loader ? "Editar Proyecto" : "Editando..."}
-      </button>
-      {projectEdited && (
-          <article className="flex flex-col items-center w-full">
-            <p className="text-xl mt-2 py-2 text-custom-green text-center">
-              Genial, tu protecto se ha editado con Exito!
-            </p>
-            <SecondaryButton href="/proyectos" text="Ir a Galeria" style="" />
-          </article>
-        )}
+          {/* Form fields */}
+          <div>
+            <label className="block text-xl font-medium text-custom-green ">
+              Título
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-xl font-medium text-custom-green">
+              Ubicación
+            </label>
+            <input
+              type="text"
+              name="place"
+              value={formData.place}
+              onChange={handleChange}
+              className="w-full border rounded  focus:outline-custom-green py-1 pl-1 h-12"
+              required
+            />
+          </div>
 
-        {projectNotEdited && (
-          <article className="flex flex-col items-center w-full">
-          <p className="text-xl mt-2 py-2 text-red-600 text-center">
-            Hubo un problema al editar el Proyecto!
-          </p>
-          <SecondaryButton href="/" text="Ir a home" style="" />
-          </article>
-        )}
-    </form>
+          <div>
+            <label className="block text-xl font-medium text-custom-green">
+              Cant. mts<sup>2</sup>
+            </label>
+            <input
+              type="number"
+              name="area"
+              value={formData.area}
+              onChange={handleChange}
+              className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
+              required
+            />
+          </div>
+
+          <FormImages
+            images={images}
+            imageFile={imageFile}
+            setImages={setImages}
+            setImageFile={setImageFile}
+            setDeleteImageDB={setDeleteImageDB}
+            deleteImageDB={deleteImageDB}
+          />
+
+          <div>
+            <label className="block text-xl font-medium text-custom-green mt-4">
+              Cant. de Habitaciones
+            </label>
+            <input
+              type="number"
+              name="rooms"
+              value={formData.rooms}
+              onChange={handleChange}
+              className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-xl font-medium text-custom-green">
+              Año de Construcción
+            </label>
+            <input
+              type="number"
+              name="year"
+              value={formData.year}
+              onChange={handleChange}
+              className="w-full border rounded  focus:outline-custom-green py-1 pl-5 h-12"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-xl font-medium text-custom-green">
+              Descripción
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="mt-2 p-2 w-full border rounded-md  min-h-[150px] resize-none 
+          focus:outline-custom-green"
+            required
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-custom-green text-white px-4 py-2 rounded w-fit m-auto outline hover:outline-2 hover:outline-custom-green hover:bg-transparent hover:text-custom-green transition-all duration-700 "
+          >
+            {!loader ? "Editar Proyecto" : "Editando..."}
+          </button>
+          {projectEdited && (
+            <article className="flex flex-col items-center w-full">
+              <p className="text-xl mt-2 py-2 text-custom-green text-center">
+                Genial, tu protecto se ha editado con Exito!
+              </p>
+              <SecondaryButton href="/proyectos" text="Ir a Galeria" style="" />
+            </article>
+          )}
+
+          {projectNotEdited && (
+            <article className="flex flex-col items-center w-full">
+              <p className="text-xl mt-2 py-2 text-red-600 text-center">
+                Hubo un problema al editar el Proyecto!
+              </p>
+              <SecondaryButton href="/" text="Ir a home" style="" />
+            </article>
+          )}
+        </form>
+      )}
     </>
   );
 };
