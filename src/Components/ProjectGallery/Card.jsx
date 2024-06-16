@@ -2,9 +2,9 @@
 import { useEffect,useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { suspend } from "suspend-react";
 import {getProjects} from "@/Utils/project-crud";
 import CardSkeleton from "../Skeletons/CardSkeleton";
+import PlusCard from "./plusCard";
 
 function Card() {
   const [projects, setProjects] = useState(null);
@@ -31,6 +31,7 @@ function Card() {
   
   return (
     <div className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
+      <PlusCard/>
       {
         projects?.map((project) => (
           <article
