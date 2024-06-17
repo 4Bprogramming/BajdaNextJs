@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 import { NextResponse } from "next/server";
+import { v2 as cloudinary } from "cloudinary";
 const prisma = new PrismaClient();
 
 export async function GET(request) {
@@ -93,25 +94,39 @@ export async function DELETE(request) {
 
     if (projectId && (!imageIds || imageIds.length === 0)) {
       // Desconectar todas las imágenes del proyecto
-      await prisma.project.update({
-        where: { id: projectId },
-        data: {
-          images: {
-            disconnect: true
-          }
+      const images = await prisma.image.findMany({
+        where: {
+          projectId: projectId
         }
       });
 
+      const publicId= images.map((image)=>image.cloudinaryID)
+      console.log('imagenes al cloudinary=>', publicId);
+      cloudinary.config({
+        cloud_name: process.env.NEXT_PUBLIC_CLOUDNAME,
+        api_key: process.env.NEXT_PUBLIC_APIKEY,
+        api_secret: process.env.NEXT_PUBLIC_SECRET
+      });
+      await Promise.all(
+        publicId.map(async (id) => {
+          const response = await cloudinary.uploader.destroy(id);
+          console.log('response cloudinary==>', response);
+          if (response.result !== "ok") {
+      
+            throw new Error(`Failed to delete image with ID ${id}: ${response.result}`);
+          } 
+        })
+      );
+     
+
       // Eliminar imágenes que ya no están relacionadas con ningún proyecto
+      
       await prisma.image.deleteMany({
         where: {
-          projects: {
-            none: {
-              id: projectId
-            }
-          }
+          projectId:projectId 
         }
       });
+
 
       // Eliminar el proyecto
       await prisma.project.delete({
@@ -120,8 +135,8 @@ export async function DELETE(request) {
     }
 
     return NextResponse.json(
-      { message: "Images and/or project deleted successfully" },
-      { status: 200 }
+      { message: "Images and/or project deleted successfully", status: 204  },
+
     );
   } catch (error) {
     console.error("Error deleting images and/or project:", error);

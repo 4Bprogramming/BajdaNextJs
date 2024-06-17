@@ -79,7 +79,7 @@ export async function updateProject(body, id) {
         console.error(error); 
     }
 }
-export async function deleteImageProject(imageIds, projectId) {
+export async function deleteProjectId(imageIds, projectId) {
     try {
         const body = { imageIds, projectId }; 
         const response = await fetch(`${baseURL}/api/projects`, {
@@ -95,6 +95,7 @@ export async function deleteImageProject(imageIds, projectId) {
         }
 
         const data = await response.json();
+        console.log('data==>', data);
         return data;
     } catch (error) {
         console.error('Failed to delete image from project:', error);

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import EmblaCarousel from "../Carousel/EmblaCarousel";
 import "../Carousel/embla.css";
@@ -7,11 +7,35 @@ import { getProjectById } from "@/Utils/project-crud";
 import EmblaCarouselSkeleton from "../Skeletons/EmblaCarouselSkeleton";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import DeleteButton from "../Buttons/DeleteButton";
+import ConfirmationModal from '../Confirmation modal/confirmationModal'
+import { useRouter } from 'next/navigation'
+import { deleteProjectId } from '@/Utils/project-crud'
 
 function Project() {
+  const router= useRouter()
   const projectId = usePathname().split("/").at(2);
   const [project, setProject] = useState({});
   const OPTIONS = { dragFree: true };
+  const [modal, setModal]= useState(false)
+ 
+
+  const changeModalStatus=()=>{
+    setModal(prevModal => !prevModal);
+  }
+  
+
+
+
+  const message='¿Esta seguro de borrar el proyecto completo?'
+  const handleDelete=async ()=>{
+    const numberProjectId= Number(projectId)
+    const response= await deleteProjectId(null,numberProjectId) 
+
+  }
+  const onCloseReDirect= ()=>{
+    router.push('/proyectos');
+  }
+  const okMessage= 'El proyecto fue Eliminado'
 
   async function getProject(projectId) {
     const response = await getProjectById(projectId);
@@ -38,8 +62,9 @@ function Project() {
         </div>
         <div className="flex w-full justify-end">
           <DeleteButton
-            href={`/admin/edit/${projectId}`}
+            onClick={changeModalStatus}
             text="Eliminar"
+            
        
           />
         </div>
@@ -74,6 +99,10 @@ function Project() {
             {project.description}
           </p>
         </div>
+        {modal &&
+        <ConfirmationModal message={message} okMessage={okMessage}onAccept={handleDelete}onCloseReDirect={onCloseReDirect} id={projectId} modal={changeModalStatus} />
+
+        }
       </article>
     </section>
   );
