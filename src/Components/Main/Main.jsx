@@ -4,11 +4,14 @@ import mainBanner from "../../../public/resources/mainImage.jpg";
 import nuestroEstudio from "../../../public/resources/nuestroEstudio.jpg";
 import GreenButton from "../Buttons/greenButton";
 import SendEmail from "../Services/SendEmail";
+import whatsapp from "@/assets/whatsapp.svg"
+import '../../app/globals.css'
 
 function Main() {
   return (
     <>
       <main className="pt-32" id="home">
+    
         <section className="relative">
           <div className="w-full h-44  overflow-hidden sm:h-56 md:h-72 lg:h-96 xl:h-[30rem]">
             <Image
@@ -36,6 +39,9 @@ function Main() {
          
           <h2 className=" text-5xl text-custom-green" >Nosotros</h2>
         </section>
+        <a href="https://api.whatsapp.com/send?phone=51991341292">
+      <Image src={whatsapp} className="btnFlotante" />
+      </a>
         <section>
           <article className="grid grid-cols-1  md:grid-cols-2 md:mb-14 md:mt-8 md:mr-32">
             <nuestro-estudio-left class="block p-2 md:p-6">
