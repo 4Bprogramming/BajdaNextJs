@@ -5,6 +5,7 @@ import Image from "next/image";
 import {getProjects} from "@/Utils/project-crud";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import PlusCard from "./plusCard";
+import PreloadImages from "../Loaders/PreloadImages";
 
 function Card() {
   const [projects, setProjects] = useState(null);
@@ -30,6 +31,8 @@ function Card() {
   }
   
   return (
+    <>
+    <PreloadImages imageUrls={projects.images?.Filter((image)=>image.main===true)} />
     <div className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
       <PlusCard/>
       {
@@ -77,6 +80,7 @@ function Card() {
           </article>
         ))}
     </div>
+    </>
   );
 }
 

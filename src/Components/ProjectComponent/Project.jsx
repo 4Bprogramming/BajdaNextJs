@@ -10,6 +10,7 @@ import DeleteButton from "../Buttons/DeleteButton";
 import ConfirmationModal from '../Confirmation modal/confirmationModal'
 import { useRouter } from 'next/navigation'
 import { deleteProjectId } from '@/Utils/project-crud'
+import PreloadImages from "../Loaders/PreloadImages";
 
 function Project() {
   const router= useRouter()
@@ -46,27 +47,29 @@ function Project() {
   }, []);
 
   return (
+    <>
+    <PreloadImages imageUrls={project.images}/>
     <section>
       <article className="flex my-4 w-[90%] m-auto">
         <div className="flex w-full gap-3">
           <SecondaryButton
             href={"/proyectos"}
             text="Atrás"
-          
-          />
+            
+            />
           <SecondaryButton
             href={`/admin/edit/${projectId}`}
             text="Editar"
-          
-          />
+            
+            />
         </div>
         <div className="flex w-full justify-end">
           <DeleteButton
             onClick={changeModalStatus}
             text="Eliminar"
             
-       
-          />
+            
+            />
         </div>
       </article>
       <article className="w-full pl-3  lg:pl-12  lg:mt-4">
@@ -101,10 +104,11 @@ function Project() {
         </div>
         {modal &&
         <ConfirmationModal message={message} okMessage={okMessage}onAccept={handleDelete}onCloseReDirect={onCloseReDirect} id={projectId} modal={changeModalStatus} />
-
-        }
+        
+      }
       </article>
     </section>
+      </>
   );
 }
 

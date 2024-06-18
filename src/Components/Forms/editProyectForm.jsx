@@ -5,6 +5,7 @@ import { getProjectById, updateProject } from "@/Utils/project-crud";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
 import CubeLoader from "../Loaders/CubeLoader";
+import PreloadImages from "../Loaders/PreloadImages";
 
 const EditProjectForm = () => {
   const projectId = usePathname().split("/").at(3);
@@ -117,6 +118,7 @@ const EditProjectForm = () => {
 
   return (
     <>
+    <PreloadImages imageUrls={project?.images}/>
       <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Edita el proyecto
       </h1>
