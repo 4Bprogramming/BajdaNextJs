@@ -1,12 +1,13 @@
-// import FormAdd from "@/Components/FormAddNewProject/Form";
-import CreateProjectForm from "@/Components/Forms/createProjectForm";
+import SignInButton from "@/Components/Buttons/SignInButton";
+
+
 
 
 export default function Admin() {
     return (
       <>
-       
-        <CreateProjectForm/>
+
+      <SignInButton/>
         
       </>
     );
