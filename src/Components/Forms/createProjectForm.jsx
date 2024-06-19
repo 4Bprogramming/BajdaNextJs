@@ -3,8 +3,12 @@ import { createProject } from "@/Utils/project-crud";
 import React, { useState } from "react";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const CreateProjectForm = () => {
+  const { data: session } = useSession();
+  console.log("datos de mi sesion-->", session);
+
   const [images, setImages] = useState([]);
   const [imageFile, setImageFile] = useState({});
   const [loader, setLoader] = useState(false);
@@ -52,8 +56,8 @@ const CreateProjectForm = () => {
       setProjectCreated(false);
       setProjectNotCreated(false);
       setLoader(true);
-      
-      const updatedFormData = { ...formData, images:[] };
+
+      const updatedFormData = { ...formData, images: [] };
       if (imageFile[0]) {
         imageFile[0].main = true;
         mainImage.push(imageFile[0]);
@@ -68,15 +72,15 @@ const CreateProjectForm = () => {
       if (otherImages.length > 0) {
         updatedFormData.images.push(...otherImages);
       }
-     
+
       const response = await createProject(JSON.stringify(updatedFormData));
 
       if (response) {
         setProjectCreated(true);
         setLoader(false);
         setFormData(formDataInitialValue);
-        setImageFile({})
-        setImages([])
+        setImageFile({});
+        setImages([]);
       } else {
         setLoader(false);
         setProjectNotCreated(true);
@@ -88,6 +92,28 @@ const CreateProjectForm = () => {
 
   return (
     <>
+      {!session ? (
+        <button
+          onClick={() => signIn()}
+          className="absolute top-0 right-0 w-fit py-1 px-2 bg-custom-green text-white rounded outline hover:outline-1 hover:outline-custom-green hover:bg-transparent hover:text-custom-green"
+        >
+          Iniciar Sesión
+        </button>
+      ) : (
+        <div>
+          <p>
+            {session.user.name} {session.user.email}
+          </p>
+          <img
+            src={`${session.user.image}`}
+            alt={`Muestra la imagen del usuario ${session.user.name}`}
+          />
+          <button onClick={async () => await signOut({ callbackUrl: "/" })}>
+            Cerrar Sesión
+          </button>
+        </div>
+      )}
+
       <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Crea el Proyecto
       </h1>
@@ -122,7 +148,12 @@ const CreateProjectForm = () => {
           className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
           required
         />
-        <FormImages images={images} imageFile={imageFile} setImages={setImages} setImageFile={setImageFile} />
+        <FormImages
+          images={images}
+          imageFile={imageFile}
+          setImages={setImages}
+          setImageFile={setImageFile}
+        />
         <input
           type="number"
           name="rooms"
@@ -168,10 +199,10 @@ const CreateProjectForm = () => {
 
         {projectNotCreated && (
           <article className="flex flex-col items-center w-full">
-          <p className="text-xl mt-2 py-2 text-red-600 text-center">
-            Hubo un problema al crear el Proyecto!
-          </p>
-          <SecondaryButton href="/" text="Ir a home" style="" />
+            <p className="text-xl mt-2 py-2 text-red-600 text-center">
+              Hubo un problema al crear el Proyecto!
+            </p>
+            <SecondaryButton href="/" text="Ir a home" style="" />
           </article>
         )}
       </form>
