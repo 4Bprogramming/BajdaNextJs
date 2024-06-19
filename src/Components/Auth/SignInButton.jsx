@@ -4,7 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Logo from "../../../public/resources/logo.png"
-function SignInButton() {
+function SignIn() {
   const { data: session } = useSession();
 
   return (
@@ -26,4 +26,4 @@ function SignInButton() {
   );
 }
 
-export default SignInButton;
+export default SignIn;

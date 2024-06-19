@@ -6,7 +6,7 @@ import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
 import CubeLoader from "../Loaders/CubeLoader";
 import PreloadImages from "../Loaders/PreloadImages";
-import EndSession from "../Buttons/EndSession";
+import SignOut from "../Auth/SignOut";
 
 
 const EditProjectForm = () => {
@@ -120,7 +120,7 @@ const EditProjectForm = () => {
 
   return (
     <>
-    <EndSession/>
+    <SignOut/>
     <PreloadImages imageUrls={project?.images}/>
       <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Edita el proyecto

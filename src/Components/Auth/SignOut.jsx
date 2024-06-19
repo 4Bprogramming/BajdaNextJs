@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 
-function EndSession() {
+function SignOut() {
   const { data: session } = useSession();
   return (
     <div className="flex w-full items-center  justify-end border border-spacing-1 border-custom-green ">
@@ -22,4 +22,4 @@ function EndSession() {
   );
 }
 
-export default EndSession;
+export default SignOut;

@@ -3,7 +3,7 @@ import { createProject } from "@/Utils/project-crud";
 import React, { useState } from "react";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
-import EndSession from "../Buttons/EndSession";
+import SignOut from "../Auth/SignOut";
 
 
 
@@ -94,7 +94,7 @@ const CreateProjectForm = () => {
 
   return (
     <>
-      <EndSession/>
+      <SignOut/>
       <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Crea el Proyecto
       </h1>

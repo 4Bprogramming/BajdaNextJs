@@ -1,4 +1,4 @@
-import SignInButton from "@/Components/Buttons/SignInButton";
+import SignIn from "@/Components/Auth/SignInButton";
 
 
 
@@ -7,7 +7,7 @@ export default function Admin() {
     return (
       <>
 
-      <SignInButton/>
+      <SignIn/>
         
       </>
     );
