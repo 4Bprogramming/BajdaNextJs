@@ -1,12 +1,17 @@
 "use client";
-import React, {Suspense } from "react";
-
+import { useSession } from "next-auth/react";
 import Card from "@/Components/ProjectGallery/Card";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
+import EndSession from "@/Components/Buttons/EndSession";
 
 function page() {
+  const { data: session } = useSession();
+
+
   return (
+
     <section className="mb-3">
+      {session?.user && <EndSession/>}
       <SecondaryButton href="/" text="Atrás" style={"mt-2 ml-2"}/>
       <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5 lg:m-auto lg:max-w-5xl lg:my-2">
         <h1 className="text-4xl font-bold">Proyectos</h1>
