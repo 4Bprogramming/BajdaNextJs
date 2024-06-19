@@ -10,7 +10,7 @@ const handler = NextAuth({
   callbacks: {
     async signIn({ account, profile }) {
       if (account.provider === "google") {
-        return profile.email_verified && profile.email.match("carlosvazqueznosetto@gmail.com");
+        return profile.email_verified && profile.email.match(process.env.VALID_EMAIL);
       }
       return true 
     },
