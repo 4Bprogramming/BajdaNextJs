@@ -1,4 +1,4 @@
-import SignIn from "@/Components/Auth/SignInButton";
+import SignIn from "@/Components/Auth/SignIn";
 
 
 
