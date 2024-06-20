@@ -4,13 +4,15 @@ import React, { useState } from "react";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
 import SignOut from "../Auth/SignOut";
-
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 
 const CreateProjectForm = () => {
-
-
-
+  const { data: session } = useSession();
+  if(!session){
+    redirect("/proyectos")
+  }
   const [images, setImages] = useState([]);
   const [imageFile, setImageFile] = useState({});
   const [loader, setLoader] = useState(false);

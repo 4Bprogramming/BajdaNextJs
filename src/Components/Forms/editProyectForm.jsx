@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { deleteImageCloudinary } from "@/Utils/cloudinary-crud";
 import { usePathname } from "next/navigation";
@@ -7,9 +8,15 @@ import FormImages from "./formImages";
 import CubeLoader from "../Loaders/CubeLoader";
 import PreloadImages from "../Loaders/PreloadImages";
 import SignOut from "../Auth/SignOut";
-
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const EditProjectForm = () => {
+  const { data: session } = useSession();
+
+  if(!session){
+    redirect("/proyectos")
+  }
   const projectId = usePathname().split("/").at(3);
   const [project, setProject] = useState(null);
 
