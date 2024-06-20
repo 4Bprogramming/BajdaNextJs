@@ -1,8 +1,8 @@
 import React from 'react'
-
+import CubeLoader from '@/Components/Loaders/CubeLoader'
 function Loading() {
   return (
-    <div>Cargando por las dudas pero CON ID...</div>
+    <CubeLoader/>
   )
 }
 
