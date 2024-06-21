@@ -45,7 +45,10 @@ function Project() {
 
   return (
     <>
-      <PreloadImages imageUrls={project.images} />
+    {
+      project && <PreloadImages imageUrls={project?.images}/> 
+    }
+      
       <section>
         <article className="flex my-4 w-[90%] m-auto">
           <div className="flex w-full gap-3">

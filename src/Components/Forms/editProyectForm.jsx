@@ -128,7 +128,10 @@ const EditProjectForm = () => {
   return (
     <>
     <SignOut/>
-    <PreloadImages imageUrls={project?.images}/>
+    {
+      project && <PreloadImages imageUrls={project?.images}/> 
+    }
+    
       <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Edita el proyecto
       </h1>
