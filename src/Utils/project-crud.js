@@ -1,67 +1,60 @@
 import { baseURL } from "@/constants/constants";
-
+import axios from "axios";
 export async function getProjects() {
     try {
-        const response = await fetch(`${baseURL}/api/projects`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-        });
+        const response = await axios.get(baseURL);
         
-        if (!response.ok) {
+        if (response.status !== 200) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
 
-        const data = await response.json();
+        const data = response.data;
+        console.log('respuesta post proyectos=>', data);
         return data;
     } catch (error) {
-        console.error(error);
-        
+        console.error('Error en createProject:', error);
+        throw error; // Re-lanza el error para que el llamador pueda manejarlo
     }
 }
 export async function getProjectById(id) {
     
 
     try {
-        const response = await fetch(`${baseURL}/api/projects/${id}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-        });
+        const response = await axios.get(`${baseURL}/${id}`);
         
-        if (!response.ok) {
+        if (response.status !== 200) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
 
-        const data = await response.json();
+        const data = response.data;
+        console.log('respuesta post proyectos=>', data);
         return data;
     } catch (error) {
-        console.error(error);
-        
+        console.error('Error en createProject:', error);
+        throw error; // Re-lanza el error para que el llamador pueda manejarlo
     }
 }
 export async function createProject(body) {
     try {
+        const response = await axios.post(baseURL, body);
         
-        const response = await fetch(`${baseURL}/api/projects`, {
-            method: 'POST',
-            body
-        });
-        if (!response.ok) {
+        // Verifica el estado de la respuesta
+        if (response.status !== 201) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-        const data = await response.json();
+
+        const data = response.data;
+        console.log('respuesta post proyectos=>', data);
         return data;
     } catch (error) {
-        console.error(error); 
+        console.error('Error en createProject:', error);
+        throw error; // Re-lanza el error para que el llamador pueda manejarlo
     }
 }
 export async function updateProject(body, id) {
 
     try {
-        const response = await fetch(`${baseURL}/api/projects/${id}`, {
+        const response = await fetch(`${baseURL}/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json' // Asegurar el encabezado
@@ -73,7 +66,12 @@ export async function updateProject(body, id) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
 
-        const data = await response.json();
+        const text = await response.text();
+        if (!text) {
+            return {}; // Retornar un objeto vacío si la respuesta no tiene cuerpo
+        }
+
+        const data = JSON.parse(text); // Convertir el texto a JSON
         return data;
     } catch (error) {
         console.error(error); 
@@ -82,7 +80,7 @@ export async function updateProject(body, id) {
 export async function deleteProjectId(imageIds, projectId) {
     try {
         const body = { imageIds, projectId }; 
-        const response = await fetch(`${baseURL}/api/projects`, {
+        const response = await fetch(`${baseURL}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -94,8 +92,12 @@ export async function deleteProjectId(imageIds, projectId) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
 
-        const data = await response.json();
-        console.log('data==>', data);
+        const text = await response.text();
+        if (!text) {
+            return {}; // Retornar un objeto vacío si la respuesta no tiene cuerpo
+        }
+
+        const data = JSON.parse(text); // Convertir el texto a JSON
         return data;
     } catch (error) {
         console.error('Failed to delete image from project:', error);

@@ -4,6 +4,7 @@ import {
   deleteImageCloudinary,
   getImageCloudinaryObject
 } from "@/Utils/cloudinary-crud";
+import Image from "next/image";
 
 function FormImages({
   imageFile,
@@ -14,6 +15,7 @@ function FormImages({
   deleteImageDB
 }) {
   const handleImageChange = async (e) => {
+    console.log('imagen==>', e.target.files);
     const imageURLs = await getImageCloudinaryObject(e.target.files[0]);
     setImageFile(imageURLs);
   };
@@ -67,6 +69,7 @@ function FormImages({
                 }
                 alt="Project Image"
                 className="object-cover h-36 w-full md:h-52"
+                
               />
               <button
                 type="button"
@@ -126,6 +129,7 @@ function FormImages({
                 }
                 alt={`Imagen del proyecto`}
                 className="object-cover h-36 w-full md:h-48"
+                
               />
               <button
                 type="button"

@@ -68,9 +68,9 @@ const CreateProjectForm = () => {
       if (otherImages.length > 0) {
         updatedFormData.images.push(...otherImages);
       }
-     
-      const response = await createProject(JSON.stringify(updatedFormData));
-
+     console.log('updatedFormData', updatedFormData);
+      const response = await createProject(updatedFormData);
+      console.log('response Post==>', response);
       if (response) {
         setProjectCreated(true);
         setLoader(false);

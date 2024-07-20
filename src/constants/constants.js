@@ -1,5 +1,5 @@
 // constants/api.js
-const baseURL = 'http://localhost:3000'; 
-const CLOUDINARY = '/api/cloudinary';
+const baseURL = 'https://backbajda.onrender.com'; 
+const CLOUDINARY = 'https://backbajda.onrender.com/cloudinary';
 
 export { baseURL,CLOUDINARY };

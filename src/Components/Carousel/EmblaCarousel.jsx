@@ -39,6 +39,7 @@ const EmblaCarousel = (props) => {
                   className="embla__slide__img"
                   onClick={() => handleEnlargeImage(slide.url)}
                   sizes=""
+                  fill
                 />
               ) : (
                 <Image
@@ -47,6 +48,7 @@ const EmblaCarousel = (props) => {
                   layout="fill"
                   className="embla__slide__img"
                   sizes=""
+                  fill
                 />
               )}
             </div>

@@ -18,6 +18,7 @@ function NavBar() {
           src={logo}
           alt="Bajda Logo"
           style={{ width: "70px", height: "70px" }}
+          
         />
 
         <ul

@@ -18,7 +18,7 @@ function Main() {
               src={mainBanner}
               alt="main banner "
               // style={{ width: "100%", height: "auto", opacity: "85%" }}
-              fill
+              
             />
           </div>
           <article className="absolute top-6 left-2 sm:top-9 md:top-20 lg:left-6 ">
@@ -45,7 +45,7 @@ function Main() {
         <section>
           <article className="grid grid-cols-1  md:grid-cols-2 md:mb-14 md:mt-8 md:mr-32">
             <nuestro-estudio-left class="block p-2 md:p-6">
-              <Image src={nuestroEstudio} alt="nuestro estudio"/>
+              <Image src={nuestroEstudio} alt="nuestro estudio" />
             </nuestro-estudio-left>
             <nuestro-estudio-right class="block relative p-2 md:p-6">
               <h3 className="text-3xl font-semibold uppercase mb-2">

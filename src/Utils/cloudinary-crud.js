@@ -1,5 +1,5 @@
 import { CLOUDINARY } from "@/constants/constants";
-
+import axios from "axios";
 export async function getImageCloudinaryObject(file, files = []) {
   const formData = new FormData();
   if (file) {
@@ -11,11 +11,12 @@ export async function getImageCloudinaryObject(file, files = []) {
       formData.append("imagesArray", files[i]);
     }
   }
-
+  console.log('formData', formData);
   const response = await fetch(CLOUDINARY, {
     method: "POST",
     body: formData
   });
+  console.log('response', response);
 
   if (response.ok) {
     const cloudinaryObjectArray = await response.json();
@@ -24,34 +25,11 @@ export async function getImageCloudinaryObject(file, files = []) {
     console.log("Oops! ", response.statusText);
   }
 }
-// export async function deleteImageCloudinary(publicId, projectId) {
-//   try {
-//     const response = await fetch(CLOUDINARY, {
-//       method: "DELETE",
-  
-//       body: JSON.stringify({ publicId, projectId })
-//     });
-    
-//     if (response.result !== 'ok') {
-//       throw new Error(`Failed to delete image: ${response.result}`);
-//     }
-//     return response;
 
-//   } catch (error) {
-//     console.error('Failed to delete image', error);
-//     throw error;
-//   }
-
-
-//   if (response.ok) {
-//     console.log("Image deleted successfully");
-//     // Actualiza tu estado o realiza cualquier otra acción necesaria
-//   } else {
-//     console.error("Failed to delete image");
-//   }
-// }
 export async function deleteImageCloudinary(publicId, projectId) {
   try {
+    console.log('publicId', publicId);
+    console.log('projectId', projectId);
     const response = await fetch(CLOUDINARY, {
       method: "DELETE",
       headers: {
