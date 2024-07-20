@@ -15,7 +15,7 @@ function FormImages({
   deleteImageDB
 }) {
   const handleImageChange = async (e) => {
-    console.log('imagen==>', e.target.files);
+    // console.log('imagen==>', e.target.files);
     const imageURLs = await getImageCloudinaryObject(e.target.files[0]);
     setImageFile(imageURLs);
   };

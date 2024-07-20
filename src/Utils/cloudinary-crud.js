@@ -11,12 +11,12 @@ export async function getImageCloudinaryObject(file, files = []) {
       formData.append("imagesArray", files[i]);
     }
   }
-  console.log('formData', formData);
+  // console.log('formData', formData);
   const response = await fetch(CLOUDINARY, {
     method: "POST",
     body: formData
   });
-  console.log('response', response);
+  // console.log('response', response);
 
   if (response.ok) {
     const cloudinaryObjectArray = await response.json();
@@ -28,8 +28,8 @@ export async function getImageCloudinaryObject(file, files = []) {
 
 export async function deleteImageCloudinary(publicId, projectId) {
   try {
-    console.log('publicId', publicId);
-    console.log('projectId', projectId);
+    // console.log('publicId', publicId);
+    // console.log('projectId', projectId);
     const response = await fetch(CLOUDINARY, {
       method: "DELETE",
       headers: {

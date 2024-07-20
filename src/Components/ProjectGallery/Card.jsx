@@ -11,7 +11,7 @@ function Card() {
   const { data: session } = useSession();
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log('proeyectos==>', projects);
+  // console.log('proeyectos==>', projects);
 
   useEffect(() => {
     const fetchProjects = async () => {

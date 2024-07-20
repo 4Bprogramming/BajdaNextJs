@@ -9,7 +9,7 @@ export async function getProjects() {
         }
 
         const data = response.data;
-        console.log('respuesta post proyectos=>', data);
+        // console.log('respuesta post proyectos=>', data);
         return data;
     } catch (error) {
         console.error('Error en createProject:', error);
@@ -27,7 +27,7 @@ export async function getProjectById(id) {
         }
 
         const data = response.data;
-        console.log('respuesta post proyectos=>', data);
+        // console.log('respuesta post proyectos=>', data);
         return data;
     } catch (error) {
         console.error('Error en createProject:', error);
@@ -44,7 +44,7 @@ export async function createProject(body) {
         }
 
         const data = response.data;
-        console.log('respuesta post proyectos=>', data);
+        // console.log('respuesta post proyectos=>', data);
         return data;
     } catch (error) {
         console.error('Error en createProject:', error);
