@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from 'react'
 
-function ConfirmationModal({ message, onAccept, onClose, onCloseReDirect, okMessage, modal }) {
+function ConfirmationModal({ message, onAccept, onClose, onCloseReDirect, okMessage}) {
     const [showModal, setShowModal] = useState(true)
     const [showOkModal, setShowOkModal] = useState(false);
   
     const handleClose = () => {
-      modal();
+ 
       setShowModal(!showModal)
       if (onClose) onClose();
     };
@@ -23,7 +23,7 @@ function ConfirmationModal({ message, onAccept, onClose, onCloseReDirect, okMess
             onCloseReDirect()
         }
         if(onClose)onClose();
-        modal()
+       
     };
   
     return (

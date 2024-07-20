@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import { deleteImageCloudinary } from "@/Utils/cloudinary-crud";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getProjectById, updateProject } from "@/Utils/project-crud";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
@@ -10,16 +10,18 @@ import PreloadImages from "../Loaders/PreloadImages";
 import SignOut from "../Auth/SignOut";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import OnlyConfirmationModal from "../Confirmation modal/onlyconfirmationModal";
 
 const EditProjectForm = () => {
   const { data: session } = useSession();
-
+  const router = useRouter();
   if(!session){
     redirect("/proyectos")
   }
+  
   const projectId = usePathname().split("/").at(3);
   const [project, setProject] = useState(null);
-
+  
   const initialFormState = {
     place: "",
     title: "",
@@ -33,7 +35,6 @@ const EditProjectForm = () => {
     type: "",
     year: 0
   };
-
   const [formData, setFormData] = useState(initialFormState);
   const [images, setImages] = useState([]);
   const [imageFile, setImageFile] = useState({});
@@ -41,7 +42,6 @@ const EditProjectForm = () => {
   const [loader, setLoader] = useState(false);
   const [projectEdited, setProjectEdited] = useState(false);
   const [projectNotEdited, setProjectNotEdited] = useState(false);
-
   useEffect(() => {
     // Simula la obtención de datos del proyecto
     async function getProject(projectId) {
@@ -50,7 +50,6 @@ const EditProjectForm = () => {
     }
     getProject(projectId);
   }, [projectId]);
-
   /* usar dos useEffect separados permite manejar de manera clara y efectiva la obtención de datos y la sincronización del estado del formulario, mejorando la claridad y la mantenibilidad del código.*/
   useEffect(() => {
     if (project) {
@@ -63,12 +62,13 @@ const EditProjectForm = () => {
       setImages(nonMainImages);
     }
   }, [project]);
-
+  const reDirectOK= ()=>{
+    router.push(`/proyectos/${projectId}`);
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const id = project.id;
@@ -76,24 +76,19 @@ const EditProjectForm = () => {
       ...formData,
       images: []
     };
-
     const mainImage = [];
     setProjectEdited(false);
     setProjectNotEdited(false);
-
     try {
       setLoader(true);
       if (imageFile[0]) {
         imageFile[0].main = true;
         mainImage.push(imageFile[0]);
       }
-
       const otherImages = images.filter((image) => image.secure_url);
-
       if (mainImage.length > 0) {
         updatedProject.images.push(...mainImage);
       }
-
       if (otherImages.length > 0) {
         updatedProject.images.push(...otherImages);
       }
@@ -108,7 +103,6 @@ const EditProjectForm = () => {
         setLoader(false);
         setProjectNotEdited(true);
       }
-
       if (imageFile.secure_url) {
         deleteImageDB.push(imageFile[0]);
       }
@@ -118,13 +112,11 @@ const EditProjectForm = () => {
           .flat();
         await deleteImageCloudinary(cloudinaryImageIds, id);
       }
-
       // ('Project updated successfully', response);
     } catch (error) {
       console.error("Error updating project", error);
     }
   };
-
   return (
     <>
     <SignOut/>
@@ -169,7 +161,6 @@ const EditProjectForm = () => {
               required
             />
           </div>
-
           <div>
             <label className="block text-xl font-medium text-custom-green">
               Cant. mts<sup>2</sup>
@@ -183,7 +174,6 @@ const EditProjectForm = () => {
               required
             />
           </div>
-
           <FormImages
             images={images}
             imageFile={imageFile}
@@ -192,7 +182,6 @@ const EditProjectForm = () => {
             setDeleteImageDB={setDeleteImageDB}
             deleteImageDB={deleteImageDB}
           />
-
           <div>
             <label className="block text-xl font-medium text-custom-green mt-4">
               Cant. de Habitaciones
@@ -239,14 +228,14 @@ const EditProjectForm = () => {
             {!loader ? "Editar Proyecto" : "Editando..."}
           </button>
           {projectEdited && (
-            <article className="flex flex-col items-center w-full">
-              <p className="text-xl mt-2 py-2 text-custom-green text-center">
-                Genial, tu protecto se ha editado con Exito!
-              </p>
-              <SecondaryButton href="/proyectos" text="Ir a Galeria" style="" />
-            </article>
+            // <article className="flex flex-col items-center w-full">
+            //   <p className="text-xl mt-2 py-2 text-custom-green text-center">
+            //     Genial, tu protecto se ha editado con Exito!
+            //   </p>
+            //   <SecondaryButton href="/proyectos" text="Ir a Galeria" style="" />
+            // </article>
+            <OnlyConfirmationModal message='El proyecto fue editado correctamente'  onCloseReDirect={reDirectOK}/>
           )}
-
           {projectNotEdited && (
             <article className="flex flex-col items-center w-full">
               <p className="text-xl mt-2 py-2 text-red-600 text-center">
@@ -260,5 +249,4 @@ const EditProjectForm = () => {
     </>
   );
 };
-
 export default EditProjectForm;

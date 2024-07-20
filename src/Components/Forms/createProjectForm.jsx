@@ -77,7 +77,7 @@ const CreateProjectForm = () => {
         updatedFormData.images.push(...otherImages);
       }
 
-      const response = await createProject(JSON.stringify(updatedFormData));
+      const response = await createProject(updatedFormData);
 
       if (response) {
         setProjectCreated(true);
