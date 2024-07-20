@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { deleteImageCloudinary } from "@/Utils/cloudinary-crud";
 import { usePathname } from "next/navigation";
@@ -6,8 +7,16 @@ import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
 import CubeLoader from "../Loaders/CubeLoader";
 import PreloadImages from "../Loaders/PreloadImages";
+import SignOut from "../Auth/SignOut";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const EditProjectForm = () => {
+  const { data: session } = useSession();
+
+  if(!session){
+    redirect("/proyectos")
+  }
   const projectId = usePathname().split("/").at(3);
   const [project, setProject] = useState(null);
 
@@ -118,7 +127,11 @@ const EditProjectForm = () => {
 
   return (
     <>
-    <PreloadImages imageUrls={project?.images}/>
+    <SignOut/>
+    {
+      project && <PreloadImages imageUrls={project?.images}/> 
+    }
+    
       <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Edita el proyecto
       </h1>

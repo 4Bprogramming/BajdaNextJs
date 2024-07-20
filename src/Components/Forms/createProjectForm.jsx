@@ -3,8 +3,16 @@ import { createProject } from "@/Utils/project-crud";
 import React, { useState } from "react";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import FormImages from "./formImages";
+import SignOut from "../Auth/SignOut";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+
 
 const CreateProjectForm = () => {
+  const { data: session } = useSession();
+  if(!session){
+    redirect("/proyectos")
+  }
   const [images, setImages] = useState([]);
   const [imageFile, setImageFile] = useState({});
   const [loader, setLoader] = useState(false);
@@ -52,8 +60,8 @@ const CreateProjectForm = () => {
       setProjectCreated(false);
       setProjectNotCreated(false);
       setLoader(true);
-      
-      const updatedFormData = { ...formData, images:[] };
+
+      const updatedFormData = { ...formData, images: [] };
       if (imageFile[0]) {
         imageFile[0].main = true;
         mainImage.push(imageFile[0]);
@@ -68,15 +76,15 @@ const CreateProjectForm = () => {
       if (otherImages.length > 0) {
         updatedFormData.images.push(...otherImages);
       }
-     console.log('updatedFormData', updatedFormData);
-      const response = await createProject(updatedFormData);
-      console.log('response Post==>', response);
+
+      const response = await createProject(JSON.stringify(updatedFormData));
+
       if (response) {
         setProjectCreated(true);
         setLoader(false);
         setFormData(formDataInitialValue);
-        setImageFile({})
-        setImages([])
+        setImageFile({});
+        setImages([]);
       } else {
         setLoader(false);
         setProjectNotCreated(true);
@@ -88,6 +96,7 @@ const CreateProjectForm = () => {
 
   return (
     <>
+      <SignOut/>
       <h1 className="mt-4 mb-6 pl-1 text-2xl text-custom-green sm:pl-24 lg:text-3xl">
         Crea el Proyecto
       </h1>
@@ -122,7 +131,12 @@ const CreateProjectForm = () => {
           className="border rounded  focus:outline-custom-green py-1 pl-1 h-10 mt-1"
           required
         />
-        <FormImages images={images} imageFile={imageFile} setImages={setImages} setImageFile={setImageFile} />
+        <FormImages
+          images={images}
+          imageFile={imageFile}
+          setImages={setImages}
+          setImageFile={setImageFile}
+        />
         <input
           type="number"
           name="rooms"
@@ -168,10 +182,10 @@ const CreateProjectForm = () => {
 
         {projectNotCreated && (
           <article className="flex flex-col items-center w-full">
-          <p className="text-xl mt-2 py-2 text-red-600 text-center">
-            Hubo un problema al crear el Proyecto!
-          </p>
-          <SecondaryButton href="/" text="Ir a home" style="" />
+            <p className="text-xl mt-2 py-2 text-red-600 text-center">
+              Hubo un problema al crear el Proyecto!
+            </p>
+            <SecondaryButton href="/" text="Ir a home" style="" />
           </article>
         )}
       </form>

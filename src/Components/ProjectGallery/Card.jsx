@@ -6,8 +6,9 @@ import {getProjects} from "@/Utils/project-crud";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import PlusCard from "./plusCard";
 import PreloadImages from "../Loaders/PreloadImages";
-
+import { useSession } from "next-auth/react";
 function Card() {
+  const { data: session } = useSession();
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(true);
   console.log('proeyectos==>', projects);
@@ -33,9 +34,13 @@ function Card() {
   
   return (
     <>
-    <PreloadImages imageUrls={projects?.images?.Filter((image)=>image.main===true)} />
+    {
+      projects && <PreloadImages imageUrls={projects.images?.Filter((image)=>image.main===true)} /> 
+    }
+    
     <div className="grid grid-cols-1 m-auto max-w-5xl gap-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 ">
-      <PlusCard/>
+
+      {session?.user && <PlusCard/>}
       {
         projects?.map((project) => (
           <article
