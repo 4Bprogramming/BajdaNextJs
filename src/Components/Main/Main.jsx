@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import mainBanner from "../../../public/resources/mainImage.jpg";
 import nuestroEstudio from "../../../public/resources/nuestroEstudio.jpg";
-import GreenButton from "../Buttons/greenButton";
+import GreenButton from "../Buttons/GreenButton";
 import SendEmail from "../Services/SendEmail";
 import whatsapp from "@/assets/whatsapp.svg"
 import '../../app/globals.css'

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {getProjects} from "@/Utils/project-crud";
 import CardSkeleton from "../Skeletons/CardSkeleton";
-import PlusCard from "./plusCard";
+import PlusCard from "./PlusCard";
 import PreloadImages from "../Loaders/PreloadImages";
 import { useSession } from "next-auth/react";
 function Card() {
