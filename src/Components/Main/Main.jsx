@@ -5,7 +5,7 @@ import nuestroEstudio from "../../../public/resources/nuestroEstudio.jpg";
 import GreenButton from "../Buttons/GreenButton";
 import SendEmail from "../Services/SendEmail";
 import whatsapp from "@/assets/whatsapp.svg"
-import '../../app/globals.css'
+import '../../styles/globals.css'
 
 function Main() {
   return (
