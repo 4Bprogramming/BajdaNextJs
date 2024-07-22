@@ -4,7 +4,7 @@ import Card from "@/Components/ProjectGallery/Card";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import SignOut from "@/Components/Auth/SignOut";
 
-function page() {
+function Page() {
   const { data: session } = useSession();
 
 
@@ -37,4 +37,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
