@@ -4,7 +4,7 @@ import ConfirmationModal from '../Confirmation modal/confirmationModal'
 import { useRouter } from 'next/router'
 import { deleteProjectId } from '@/Utils/project-crud'
 
-function deleteProject({id}) {
+function DeleteProject({id}) {
   const router= useRouter()
   const message='¿Esta seguro de borrar el proyecto completo?'
   const onAccept=()=>{
@@ -22,4 +22,4 @@ function deleteProject({id}) {
   )
 }
 
-export default deleteProject
+export default DeleteProject
