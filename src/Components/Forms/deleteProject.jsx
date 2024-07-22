@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import ConfirmationModal from '../Confirmation modal/confirmationModal'
 import { useRouter } from 'next/router'
