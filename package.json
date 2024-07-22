@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prebuild": "npx tailwindcss -i ./src/app/globals.css -o ./src/app/globals.css"
+    "prebuild": "npx tailwindcss -i ./src/styles/globals.css -o ./src/styles/globals.css"
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
