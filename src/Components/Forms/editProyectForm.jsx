@@ -10,7 +10,7 @@ import PreloadImages from "../Loaders/PreloadImages";
 import SignOut from "../Auth/SignOut";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import OnlyConfirmationModal from "../Confirmation modal/onlyconfirmationModal";
+import OnlyConfirmationModal from "../Confirmation modal/onlyConfirmationModal";
 
 const EditProjectForm = () => {
   const { data: session } = useSession();
