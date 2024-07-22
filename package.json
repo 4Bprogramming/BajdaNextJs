@@ -8,12 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "prebuild": "npx tailwindcss -i ./src/app/globals.css -o ./src/app/globals.css"
-    
-    
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
     "@prisma/client": "^5.15.0",
+    "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
     "cloudinary": "^2.2.0",
     "embla-carousel-react": "^8.1.3",
@@ -23,6 +22,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "sharp": "^0.33.4",
     "suspend-react": "^0.1.3",
     "uid": "^2.0.2",
     "uuid": "^9.0.1"
