@@ -55,24 +55,20 @@ function Main() {
                 </span>
               </h3>
               <p className="text-grey-1">
-                Partiendo de la premisa de que la presencia humana da
-                significado a la arquitectura, acompañamos a nuestros clientes
-                en cada etapa del proyecto, dando respuestas a cada una de las
-                necesidades planteadas.
+              En nuestro estudio de arquitectura, entendemos que la verdadera esencia de los espacios proviene de las personas que los habitan.
               </p>
               <p className="text-grey-1">
-                A través del contacto constante con nuestros clientes,
-                intentamos encontrar los sentimientos, sensaciones y anhelosque
-                definen y completan las expectativas puestas en cada idea
-                personal.
+              Trabajamos en conjunto con nuestros clientes cada fase del proyecto, nos esforzamos por captar y materializar los sueños, emociones y aspiraciones, proporcionando soluciones innovadoras y adaptadas a sus necesidades.
+              </p>
+              <p className="text-grey-1">
+              Priorizamos la arquitectura sustentable, integrando prácticas ecológicas que minimizan el impacto ambiental y promueven el bienestar a largo plazo.
+              </p>
+              <p className="text-grey-1">
+              Utilizamos materiales sostenibles, sistemas energéticamente eficientes y pautas de diseño bioclimático para asegurar que cada proyecto no solo sea funcional, sino también responsable con el medio ambiente y el entorno inmediato.
               </p>
               <h4 className=" my-1 font-semibold text-grey-1">TRAYECTORIA</h4>
               <p className="text-grey-1">
-                A partir del año 1998 y desde la ciudad de Bariloche, en Rio
-                Negro, Argentina, Martín Bajda y Asociados trabaja para hacer
-                realidad los proyectos de sus clientes locales y extranjeros,
-                acompañándolos y comprometiendo todo su conocimiento profesional
-                y voluntad personal en cada nuevo planteo arquitectónico.
+              A partir del año 1998 y desde la ciudad de San Carlos de Bariloche, en Rio Negro, Argentina, el estudio de arquitectura trabaja para hacer realidad los proyectos de sus clientes, acompañándolos y comprometiendo todo su conocimiento profesional y voluntad personal en cada nuevo planteo arquitectónico.
               </p>
             </nuestro-estudio-right>
           </article>

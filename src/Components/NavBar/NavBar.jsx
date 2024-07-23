@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenuButton from "../BurgeMenuButton/BurgerMenuButton";
-import logo from "../../../public/resources/logo.png";
+import logo from "../../../public/resources/logo-x4.png";
 
 function NavBar() {
   const [isVisible, SetIsVisible] = React.useState(false);
