@@ -11,7 +11,7 @@ function Main() {
   return (
     <>
       <main className="pt-32" id="home">
-    
+     
         <section className="relative">
           <div className="w-full h-44  overflow-hidden sm:h-56 md:h-72 lg:h-96 xl:h-[30rem]">
             <Image
