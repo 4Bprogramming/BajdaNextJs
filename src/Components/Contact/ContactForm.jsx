@@ -18,7 +18,7 @@ function ContactForm() {
     }
     form.current.reset();
   }
-
+ 
 
   return (
     <section class="bg-custom-contact pb-10 md:col-span-7 lg:col-span-8">
