@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { FaInstagram } from "react-icons/fa";
 
 function ContactMedia() {
-  return (
+  return ( 
     <media-container class=" flex flex-col gap-y-3 md:col-span-5 lg:col-span-4">
       <contact-us class="flex flex-col items-start ml-4 w-full ">
         <h4 class=" text-2xl font-semibold text-grey-1">Contáctanos</h4>
