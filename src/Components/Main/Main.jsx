@@ -42,7 +42,7 @@ function Main() {
          
           <h2 className=" text-5xl text-custom-green" >Nosotros</h2>
         </section>
-        <a href="https://api.whatsapp.com/send?phone=51991341292">
+        <a href="https://api.whatsapp.com/send?phone=5492944581548">
       <Image src={whatsapp} className="btnFlotante" />
       </a>
         <section>
