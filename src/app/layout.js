@@ -15,12 +15,12 @@ export const metadata = {
   keywords: "arquitectura, diseño sustentable, San Carlos de Bariloche, estudio de arquitectura, Arq. Martin Bajda",
   openGraph: {
     type: 'website',
-    url: 'https://bajdanext.vercel.app',
+    url: 'https://estudiomartinbajda.com.ar',
     title: 'Arq. Martin Bajda - Estudio de Arquitectura en San Carlos de Bariloche',
     description: 'Desde 1998, en San Carlos de Bariloche, ofrecemos servicios de arquitectura sustentable y diseño innovador. Convierta sus sueños en realidad con Arq. Martin Bajda.',
     images: [
       {
-        url: 'https://bajdanext.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-x4.b170437a.png&w=640&q=75',
+        url: 'https://estudiomartinbajda.com.ar/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-x4.b170437a.png&w=640&q=75',
         width: 452,
         height: 452,
         alt: 'Estudio de Arquitectura Arq. Martin Bajda',
@@ -32,9 +32,9 @@ export const metadata = {
   },
   instagram: {
     site: '@arq.martin_bajda',
-    image: 'https://bajdanext.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-x4.b170437a.png&w=640&q=75',
+    image: 'https://estudiomartinbajda.com.ar/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-x4.b170437a.png&w=640&q=75',
   },
-  canonical: 'https://bajdanext.vercel.app'
+  canonical: 'https://estudiomartinbajda.com.ar'
 };
 
 export default function RootLayout({ children }) {
