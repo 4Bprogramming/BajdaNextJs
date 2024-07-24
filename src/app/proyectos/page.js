@@ -15,7 +15,7 @@ function Page() {
       <SecondaryButton href="/" text="Atrás" style={"mt-2 ml-2"}/>
       <article className=" my-4 ml-1 max-w-4xl m-auto border-l-[3px] border-custom-green px-3 py-4 sm:ml-5 lg:m-auto lg:max-w-5xl lg:my-2">
         <h1 className="text-4xl font-bold">Proyectos</h1>
-        <p className=" text-justify pt-3">
+        {/* <p className=" text-justify pt-3">
           Cada proyecto se piensa como un desafío, en el cual se tiene en cuenta
           como eje principal las necesidades y deseos de cada cliente y su
           familia. De esta manera, se brinda en cada detalle la solución
@@ -29,7 +29,7 @@ function Page() {
           sino también los deseos y anhelos inconscientes, y que van a conformar
           en conjunto la base para proyectar una vivienda que sea disfrutada en
           plenitud.
-        </p>
+        </p> */}
       </article>
         <Card />
      
