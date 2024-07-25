@@ -57,20 +57,20 @@ function Main() {
                   Estudio
                 </span>
               </h3>
-              <p className="text-grey-1">
+              <p className="text-grey-1 text-justify">
               En nuestro estudio de arquitectura, entendemos que la verdadera esencia de los espacios proviene de las personas que los habitan.
               </p>
-              <p className="text-grey-1">
+              <p className="text-grey-1 text-justify">
               Trabajamos en conjunto con nuestros clientes cada fase del proyecto, nos esforzamos por captar y materializar los sueños, emociones y aspiraciones, proporcionando soluciones innovadoras y adaptadas a sus necesidades.
               </p>
-              <p className="text-grey-1">
+              <p className="text-grey-1 text-justify">
               Priorizamos la arquitectura sustentable, integrando prácticas ecológicas que minimizan el impacto ambiental y promueven el bienestar a largo plazo.
               </p>
-              <p className="text-grey-1">
+              <p className="text-grey-1 text-justify">
               Utilizamos materiales sostenibles, sistemas energéticamente eficientes y pautas de diseño bioclimático para asegurar que cada proyecto no solo sea funcional, sino también responsable con el medio ambiente y el entorno inmediato.
               </p>
               <h4 className=" my-1 font-semibold text-grey-1">TRAYECTORIA</h4>
-              <p className="text-grey-1">
+              <p className="text-grey-1 text-justify">
               A partir del año 1998 y desde la ciudad de San Carlos de Bariloche, en Rio Negro, Argentina, el estudio de arquitectura trabaja para hacer realidad los proyectos de sus clientes, acompañándolos y comprometiendo todo su conocimiento profesional y voluntad personal en cada nuevo planteo arquitectónico.
               </p>
             </nuestro-estudio-right>
