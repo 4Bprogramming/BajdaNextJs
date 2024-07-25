@@ -32,7 +32,7 @@ function Main() {
               </span>{" "}
               Martín Bajda
             </h1>
-            <p className="text-white md:text-4xl test-md-pt-4 lg:text-4xl ">
+            <p className="text-white md:text-4xl md:pt-custom lg:text-4xl ">
               Estudio de Arquitectura
             </p>
           </article>
