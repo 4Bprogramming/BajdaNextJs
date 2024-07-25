@@ -25,14 +25,13 @@ function Main() {
             />
           </div>
           <article className="absolute top-6 left-2 sm:top-9 md:top-20 lg:left-6 p-4 rounded-lg" style={{ backgroundColor: 'rgba(44, 38, 36 , 0.6)' }}>
-            <p className="text-white md:text-4xl lg:text-5xl">Arquitecto</p>
             <h1 className="text-white max-320:text-3xl text-4xl md:text-7xl lg:text-8xl ">
               <span className="text-custom-green">
                 Arq.
               </span>{" "}
               Martín Bajda
             </h1>
-            <p className="text-white md:text-4xl lg:text-4xl">
+            <p className="text-white md:text-4xl md:pt-3 lg:text-4xl">
               Estudio de Arquitectura
             </p>
           </article>
