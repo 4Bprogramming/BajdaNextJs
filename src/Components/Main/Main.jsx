@@ -8,8 +8,16 @@ import whatsapp from "@/assets/whatsapp.svg"
 import '../../styles/globals.css'
 
 function Main() {
+
   return (
     <>
+    <style>
+      @media (min-width: 768px) {
+        .test-md-pt-4 {
+          padding-top: 1rem;
+        }
+      }
+    </style>
       <main className="pt-32" id="home">
      
         <section className="relative">
@@ -31,7 +39,7 @@ function Main() {
               </span>{" "}
               Martín Bajda
             </h1>
-            <p className="text-white md:text-4xl md:pt-4 lg:text-4xl ">
+            <p className="text-white md:text-4xl test-md-pt-4 lg:text-4xl ">
               Estudio de Arquitectura
             </p>
           </article>
