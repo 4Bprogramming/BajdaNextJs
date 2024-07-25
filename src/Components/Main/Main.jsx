@@ -6,7 +6,11 @@ import GreenButton from "../Buttons/GreenButton";
 import SendEmail from "../Services/SendEmail";
 import whatsapp from "@/assets/whatsapp.svg"
 import '../../styles/globals.css'
-
+<style>
+  {@media (min-width:870px){
+   .localmedia{paddingTop: '18px'} 
+  }
+</style>
 function Main() {
   return (
     <>
@@ -31,7 +35,7 @@ function Main() {
               </span>{" "}
               Martín Bajda
             </h1>
-            <p className="text-white md:text-4xl lg:text-4xl" style={{@media (min-width:870px){paddingTop: '18px'}}}>
+            <p className="localmedia text-white md:text-4xl lg:text-4xl ">
               Estudio de Arquitectura
             </p>
           </article>
