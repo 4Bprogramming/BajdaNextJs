@@ -31,7 +31,7 @@ function Main() {
               </span>{" "}
               Martín Bajda
             </h1>
-            <p className="text-white md:text-4xl lg:text-4xl" style={{ paddingTop: '6px'}}>
+            <p className="text-white md:text-4xl lg:text-4xl" style={{@media (min-width:870px){paddingTop: '18px'}}}>
               Estudio de Arquitectura
             </p>
           </article>
