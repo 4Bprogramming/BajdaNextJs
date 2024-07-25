@@ -7,8 +7,10 @@ import SendEmail from "../Services/SendEmail";
 import whatsapp from "@/assets/whatsapp.svg"
 import '../../styles/globals.css'
 <style>
-  {@media (min-width:870px){
-   .localmedia{paddingTop: '18px'} 
+  @media (min-width:870px){
+   .localmedia{
+     padding-top: '18px';
+   } 
   }
 </style>
 function Main() {
