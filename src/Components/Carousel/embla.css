@@ -19,6 +19,8 @@
 .embla__slide {
   position: relative;
   cursor: grabbing;
+  display: flex;
+  justify-content: center;
   flex: 0 0 var(--slide-size);
   min-width: 0;
   padding-left: var(--slide-spacing);
@@ -132,17 +134,22 @@
 }
 #enlargedImageContainer {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 450px;
-  z-index: 10;
-  text-align: center;
+  min-height: 400px;
   padding: 20px;
   opacity: 0;
-  visibility: hidden;
+  border-radius: 8px;
   transition: opacity 0.7s ease, visibility 0.7s ease;
+  z-index: 10;
 }
 #enlargedImageContainer::after {
   content: '';
@@ -158,6 +165,11 @@
 #enlargedImageContainer.show {
   opacity: 1;
   visibility: visible;
+}
+#enlargedImageContainer img{
+  width: 100%;
+  max-height: 90vh;
+ 
 }
 /*Queries*/
 @media only screen and (min-width: 1024px) {

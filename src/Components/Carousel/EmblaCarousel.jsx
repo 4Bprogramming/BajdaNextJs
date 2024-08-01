@@ -31,6 +31,20 @@ const EmblaCarousel = (props) => {
         <div className="embla__container">
           {slides?.map((slide, index) => (
             <div className="embla__slide" key={index}>
+              <div
+                style={{
+                  backgroundImage: `url(${slide.url})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  width: "100%",
+                  height: "100%",
+                  filter: 'blur(7px) grayscale(40%)',
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  zIndex: -1
+                }}
+              />
               {window.innerWidth >= 1024 ? (
                 <Image
                   src={slide.url}
@@ -39,18 +53,18 @@ const EmblaCarousel = (props) => {
                   className="embla__slide__img"
                   onClick={() => handleEnlargeImage(slide.url)}
                   sizes=""
-                  fill
+                  style={{ objectFit: "contain"}}
                 />
               ) : (
-                <Image
+                <img
                   src={slide.url}
                   alt={`Imagen de la casa ${index}`}
-                  layout="fill"
+                  layout="contain"
                   className="embla__slide__img"
                   sizes=""
-                  fill
                 />
               )}
+              
             </div>
           ))}
         </div>
@@ -83,7 +97,7 @@ const EmblaCarousel = (props) => {
         onClick={() => setEnlargedImageSrc("")}
       >
         {enlargedImageSrc && (
-          <Image src={enlargedImageSrc} alt="Imagen agrandada" fill  />
+          <img src={enlargedImageSrc} />
         )}
       </div>
     </section>
